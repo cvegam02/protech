@@ -1699,25 +1699,76 @@ body::before {
         gap: 3rem;
     }
 
+    .automotive-hero {
+        padding: 3rem 0;
+    }
+
     .automotive-hero-content {
         grid-template-columns: 1fr;
-        gap: 3rem;
+        gap: 2.5rem;
     }
 
     .automotive-hero-image {
         order: -1;
     }
 
+    .section-label {
+        font-size: 0.7rem;
+        padding: 0.3rem 0.875rem;
+        margin-bottom: 1rem;
+    }
+
+    .automotive-hero-text .section-title {
+        font-size: 1.75rem;
+        margin-bottom: 1rem;
+    }
+
+    .automotive-hero-description {
+        font-size: 1rem;
+        line-height: 1.7;
+        margin: 1rem 0 2rem;
+    }
+
     .automotive-benefits {
         grid-template-columns: 1fr;
+        gap: 1rem;
+        margin-bottom: 2rem;
+    }
+
+    .automotive-benefit {
+        padding: 0.875rem;
+        gap: 0.75rem;
+    }
+
+    .automotive-benefit i {
+        font-size: 1.25rem;
+        width: 35px;
+    }
+
+    .automotive-benefit span {
+        font-size: 0.875rem;
     }
 
     .automotive-cta {
         flex-direction: column;
+        gap: 0.75rem;
     }
 
     .automotive-cta .btn {
         width: 100%;
+        padding: 0.75rem 1.5rem;
+        font-size: 0.95rem;
+    }
+
+    .automotive-badge {
+        padding: 0.5rem 1rem;
+        font-size: 0.75rem;
+        top: 1rem;
+        right: 1rem;
+    }
+
+    .automotive-badge i {
+        font-size: 0.875rem;
     }
 
     .technology-visual {
@@ -1762,10 +1813,6 @@ body::before {
     .technology,
     .testimonials,
     .partners,
-    .automotive-hero {
-        padding: 3rem 0;
-    }
-
     /* Hero más compacto */
     .hero {
         min-height: 70vh;
@@ -1813,24 +1860,68 @@ body::before {
         margin-bottom: 2.5rem;
     }
 
+    .automotive-hero {
+        padding: 2.5rem 0;
+    }
+
     .automotive-hero-content {
         grid-template-columns: 1fr;
-        gap: 2.5rem;
+        gap: 2rem;
     }
 
     .automotive-hero-image {
         order: -1;
     }
 
+    .automotive-hero-text .section-title {
+        font-size: 1.5rem;
+        margin-bottom: 0.75rem;
+    }
+
     .automotive-hero-description {
-        font-size: 1rem;
-        margin: 1rem 0 2rem;
+        font-size: 0.95rem;
+        line-height: 1.6;
+        margin: 0.75rem 0 1.5rem;
     }
 
     .automotive-benefits {
         grid-template-columns: 1fr;
-        gap: 1rem;
-        margin-bottom: 2rem;
+        gap: 0.875rem;
+        margin-bottom: 1.5rem;
+    }
+
+    .automotive-benefit {
+        padding: 0.75rem;
+        gap: 0.625rem;
+    }
+
+    .automotive-benefit i {
+        font-size: 1.125rem;
+        width: 32px;
+    }
+
+    .automotive-benefit span {
+        font-size: 0.85rem;
+    }
+
+    .automotive-cta {
+        gap: 0.625rem;
+    }
+
+    .automotive-cta .btn {
+        padding: 0.7rem 1.25rem;
+        font-size: 0.9rem;
+    }
+
+    .automotive-badge {
+        padding: 0.45rem 0.875rem;
+        font-size: 0.7rem;
+        top: 0.875rem;
+        right: 0.875rem;
+    }
+
+    .automotive-badge i {
+        font-size: 0.8rem;
     }
 
     .automotive-cta {
@@ -2015,7 +2106,8 @@ body::before {
     .contact,
     .technology,
     .testimonials,
-    .partners {
+    .partners,
+    .automotive-hero {
         padding: 2.5rem 0;
     }
 
@@ -2166,29 +2258,64 @@ body::before {
         padding: 3rem 0;
     }
 
+    .automotive-hero-content {
+        gap: 1.75rem;
+    }
+
+    .section-label {
+        font-size: 0.65rem;
+        padding: 0.25rem 0.75rem;
+        margin-bottom: 0.875rem;
+    }
+
+    .automotive-hero-text .section-title {
+        font-size: 1.375rem;
+        margin-bottom: 0.625rem;
+    }
+
     .automotive-hero-description {
-        font-size: 0.95rem;
-        margin: 1rem 0 1.5rem;
+        font-size: 0.9rem;
+        line-height: 1.6;
+        margin: 0.625rem 0 1.25rem;
+    }
+
+    .automotive-benefits {
+        gap: 0.75rem;
+        margin-bottom: 1.25rem;
     }
 
     .automotive-benefit {
-        padding: 0.75rem;
+        padding: 0.625rem;
+        gap: 0.5rem;
     }
 
     .automotive-benefit i {
-        font-size: 1.25rem;
-        width: 35px;
+        font-size: 1rem;
+        width: 30px;
     }
 
     .automotive-benefit span {
+        font-size: 0.8rem;
+    }
+
+    .automotive-cta {
+        gap: 0.625rem;
+    }
+
+    .automotive-cta .btn {
+        padding: 0.625rem 1rem;
         font-size: 0.875rem;
     }
 
     .automotive-badge {
-        padding: 0.5rem 1rem;
+        padding: 0.4rem 0.75rem;
+        font-size: 0.65rem;
+        top: 0.75rem;
+        right: 0.75rem;
+    }
+
+    .automotive-badge i {
         font-size: 0.75rem;
-        top: 1rem;
-        right: 1rem;
     }
 }
 
