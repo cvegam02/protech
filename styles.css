@@ -533,6 +533,138 @@ body::before {
 }
 
 /* ============================================
+   AUTOMOTIVE HERO SECTION
+   ============================================ */
+.automotive-hero {
+    padding: 6rem 0;
+    background: var(--dark-bg);
+    position: relative;
+    overflow: hidden;
+}
+
+.automotive-hero::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: 
+        radial-gradient(circle at 70% 30%, rgba(0, 212, 255, 0.15) 0%, transparent 50%),
+        radial-gradient(circle at 30% 70%, rgba(0, 255, 136, 0.1) 0%, transparent 50%);
+    pointer-events: none;
+}
+
+.automotive-hero-content {
+    display: grid;
+    grid-template-columns: 1.2fr 1fr;
+    gap: 4rem;
+    align-items: center;
+    position: relative;
+    z-index: 1;
+}
+
+.automotive-hero-text {
+    position: relative;
+}
+
+.automotive-hero-description {
+    font-size: 1.125rem;
+    color: var(--text-secondary);
+    line-height: 1.8;
+    margin: 1.5rem 0 2.5rem;
+}
+
+.automotive-benefits {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.5rem;
+    margin-bottom: 2.5rem;
+}
+
+.automotive-benefit {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 1rem;
+    background: var(--dark-card);
+    border: 1px solid rgba(0, 212, 255, 0.2);
+    border-radius: 12px;
+    transition: var(--transition);
+}
+
+.automotive-benefit:hover {
+    border-color: var(--neon-blue);
+    box-shadow: 0 0 20px rgba(0, 212, 255, 0.3);
+    transform: translateY(-3px);
+}
+
+.automotive-benefit i {
+    color: var(--neon-blue);
+    font-size: 1.5rem;
+    width: 40px;
+    text-align: center;
+}
+
+.automotive-benefit span {
+    color: var(--text-primary);
+    font-weight: 600;
+    font-size: 0.95rem;
+}
+
+.automotive-cta {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+}
+
+.automotive-hero-image {
+    position: relative;
+}
+
+.automotive-image-wrapper {
+    position: relative;
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 20px 60px rgba(0, 212, 255, 0.3);
+    border: 1px solid rgba(0, 212, 255, 0.3);
+}
+
+.automotive-image-wrapper img {
+    width: 100%;
+    height: auto;
+    display: block;
+    filter: brightness(0.9);
+    transition: var(--transition);
+}
+
+.automotive-image-wrapper:hover img {
+    filter: brightness(1);
+    transform: scale(1.05);
+}
+
+.automotive-badge {
+    position: absolute;
+    top: 1.5rem;
+    right: 1.5rem;
+    background: linear-gradient(135deg, var(--neon-blue), var(--neon-green));
+    color: var(--dark-bg);
+    padding: 0.75rem 1.5rem;
+    border-radius: 50px;
+    font-weight: 700;
+    font-size: 0.875rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    box-shadow: 0 0 20px rgba(0, 212, 255, 0.6);
+    z-index: 2;
+}
+
+.automotive-badge i {
+    font-size: 1rem;
+}
+
+/* ============================================
    FEATURES SECTION
    ============================================ */
 .features {
@@ -624,172 +756,6 @@ body::before {
 /* ============================================
    SERVICES SECTION
    ============================================ */
-/* ============================================
-   PRODUCTS SHOWCASE SECTION
-   ============================================ */
-.products-showcase {
-    padding: 8rem 0;
-    background: var(--dark-bg);
-    position: relative;
-}
-
-.products-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-    gap: 2.5rem;
-    margin-top: 4rem;
-}
-
-.product-card {
-    background: var(--dark-card);
-    border-radius: 16px;
-    overflow: hidden;
-    border: 1px solid rgba(255, 255, 255, 0.05);
-    transition: var(--transition);
-    display: flex;
-    flex-direction: column;
-    position: relative;
-}
-
-.product-card::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    height: 3px;
-    background: linear-gradient(90deg, var(--neon-blue), var(--neon-green));
-    transform: scaleX(0);
-    transition: transform 0.5s ease;
-}
-
-.product-card:hover::before {
-    transform: scaleX(1);
-}
-
-.product-card:hover {
-    transform: translateY(-8px);
-    border-color: rgba(0, 212, 255, 0.3);
-    box-shadow: 0 20px 60px rgba(0, 212, 255, 0.15);
-}
-
-.product-image {
-    height: 240px;
-    background: linear-gradient(135deg, rgba(0, 212, 255, 0.1), rgba(0, 255, 136, 0.1));
-    position: relative;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    overflow: hidden;
-}
-
-.product-image::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: url('https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=800&q=80') center/cover;
-    opacity: 0.3;
-    transition: opacity 0.5s ease;
-}
-
-.product-card:nth-child(2) .product-image::before {
-    background-image: url('https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=800&q=80');
-}
-
-.product-card:nth-child(3) .product-image::before {
-    background-image: url('https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?w=800&q=80');
-}
-
-.product-card:hover .product-image::before {
-    opacity: 0.5;
-}
-
-.product-badge {
-    position: absolute;
-    top: 1.5rem;
-    right: 1.5rem;
-    padding: 0.5rem 1rem;
-    background: rgba(0, 0, 0, 0.8);
-    backdrop-filter: blur(10px);
-    border: 1px solid rgba(0, 212, 255, 0.5);
-    border-radius: 50px;
-    font-size: 0.75rem;
-    font-weight: 600;
-    color: var(--neon-blue);
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
-    z-index: 2;
-}
-
-.product-content {
-    padding: 2.5rem;
-    flex-grow: 1;
-    display: flex;
-    flex-direction: column;
-}
-
-.product-content h3 {
-    font-size: 1.75rem;
-    font-weight: 700;
-    margin-bottom: 1rem;
-    color: var(--text-primary);
-    letter-spacing: -0.02em;
-}
-
-.product-content > p {
-    color: var(--text-secondary);
-    margin-bottom: 1.5rem;
-    line-height: 1.7;
-    flex-grow: 1;
-}
-
-.product-features {
-    list-style: none;
-    margin-bottom: 2rem;
-}
-
-.product-features li {
-    padding: 0.75rem 0;
-    color: var(--text-primary);
-    display: flex;
-    align-items: center;
-    gap: 0.75rem;
-    font-size: 0.95rem;
-}
-
-.product-features i {
-    color: var(--neon-green);
-    font-size: 1rem;
-    filter: drop-shadow(0 0 5px rgba(0, 255, 136, 0.5));
-}
-
-.product-link {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.75rem;
-    color: var(--neon-blue);
-    text-decoration: none;
-    font-weight: 500;
-    font-size: 0.95rem;
-    transition: var(--transition);
-    margin-top: auto;
-}
-
-.product-link:hover {
-    color: var(--neon-green);
-    gap: 1rem;
-}
-
-.product-link i {
-    transition: transform 0.3s ease;
-}
-
-.product-link:hover i {
-    transform: translateX(5px);
-}
 
 .services {
     padding: 8rem 0;
@@ -856,6 +822,14 @@ body::before {
     transform: translateY(-10px);
     box-shadow: 0 15px 40px rgba(0, 212, 255, 0.3);
     border-color: rgba(0, 212, 255, 0.5);
+}
+
+.service-card-secondary {
+    opacity: 0.9;
+}
+
+.service-card-secondary:hover {
+    opacity: 1;
 }
 
 .service-image {
@@ -1725,6 +1699,27 @@ body::before {
         gap: 3rem;
     }
 
+    .automotive-hero-content {
+        grid-template-columns: 1fr;
+        gap: 3rem;
+    }
+
+    .automotive-hero-image {
+        order: -1;
+    }
+
+    .automotive-benefits {
+        grid-template-columns: 1fr;
+    }
+
+    .automotive-cta {
+        flex-direction: column;
+    }
+
+    .automotive-cta .btn {
+        width: 100%;
+    }
+
     .technology-visual {
         grid-template-columns: 1fr;
     }
@@ -1758,12 +1753,209 @@ body::before {
         gap: 0.5rem;
     }
 
+    /* Reducir padding de secciones en móvil */
+    .features,
+    .services,
+    .about,
+    .gallery,
+    .contact,
+    .technology,
+    .testimonials,
+    .partners,
+    .automotive-hero {
+        padding: 3rem 0;
+    }
+
+    /* Hero más compacto */
+    .hero {
+        min-height: 70vh;
+        padding: 100px 0 40px;
+    }
+
     .hero-title {
+        font-size: 2rem;
+        margin-bottom: 1rem;
+    }
+
+    .hero-subtitle {
+        font-size: 1rem;
+        margin-bottom: 2rem;
+    }
+
+    .hero-buttons {
+        flex-direction: column;
+        width: 100%;
+        gap: 0.75rem;
+        margin-bottom: 2rem;
+    }
+
+    .hero-stats {
+        margin-top: 2rem;
+        padding-top: 2rem;
+        gap: 1.5rem;
+    }
+
+    .hero-stat-number {
         font-size: 2rem;
     }
 
     .section-title {
-        font-size: 2rem;
+        font-size: 1.75rem;
+        margin-bottom: 1rem;
+    }
+
+    .section-subtitle {
+        font-size: 0.95rem;
+        margin-top: 0.75rem;
+    }
+
+    .section-header {
+        margin-bottom: 2.5rem;
+    }
+
+    .automotive-hero-content {
+        grid-template-columns: 1fr;
+        gap: 2.5rem;
+    }
+
+    .automotive-hero-image {
+        order: -1;
+    }
+
+    .automotive-hero-description {
+        font-size: 1rem;
+        margin: 1rem 0 2rem;
+    }
+
+    .automotive-benefits {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+        margin-bottom: 2rem;
+    }
+
+    .automotive-cta {
+        flex-direction: column;
+    }
+
+    .automotive-cta .btn {
+        width: 100%;
+    }
+
+    /* Footer más compacto */
+    .footer {
+        padding: 3rem 0 1.5rem;
+    }
+
+    .footer-content {
+        gap: 2rem;
+        margin-bottom: 1.5rem;
+    }
+
+    /* Tarjetas más compactas */
+    .feature-card,
+    .service-card {
+        padding: 1.5rem;
+    }
+
+    .service-image {
+        height: 150px;
+        font-size: 3rem;
+    }
+
+    .service-content {
+        padding: 1.5rem;
+    }
+
+    .service-content h3 {
+        font-size: 1.25rem;
+        margin-bottom: 0.75rem;
+    }
+
+    .service-content p {
+        font-size: 0.9rem;
+        margin-bottom: 1rem;
+    }
+
+    .service-features {
+        font-size: 0.875rem;
+    }
+
+    /* Products showcase más compacto */
+
+    /* Technology section más compacta */
+    .technology-content {
+        gap: 2rem;
+    }
+
+    .tech-features {
+        gap: 1.5rem;
+    }
+
+    .tech-icon {
+        width: 50px;
+        height: 50px;
+        font-size: 1.25rem;
+    }
+
+    .tech-info h4 {
+        font-size: 1.125rem;
+    }
+
+    .tech-info p {
+        font-size: 0.9rem;
+    }
+
+    .tech-card {
+        padding: 2rem;
+    }
+
+    .tech-number {
+        font-size: 2.5rem;
+    }
+
+    /* Testimonials más compactos */
+    .testimonial-card {
+        padding: 2rem;
+    }
+
+    .testimonial-text {
+        font-size: 0.95rem;
+        margin-bottom: 1.5rem;
+    }
+
+    /* About section más compacta */
+    .about-description {
+        font-size: 1rem;
+        margin-bottom: 2rem;
+    }
+
+    .stats {
+        gap: 1.5rem;
+    }
+
+    .stat-number {
+        font-size: 2.5rem;
+    }
+
+    /* Gallery más compacta */
+    .gallery-grid {
+        gap: 1rem;
+    }
+
+    /* Contact más compacto */
+    .contact-item {
+        gap: 1rem;
+        margin-bottom: 1.5rem;
+    }
+
+    .contact-icon {
+        width: 45px;
+        height: 45px;
+        font-size: 1.125rem;
+    }
+
+    .contact-form {
+        padding: 2rem;
     }
 
     .services-grid,
@@ -1773,19 +1965,27 @@ body::before {
 
     .features-grid {
         grid-template-columns: 1fr;
-    }
-
-    .hero-buttons {
-        flex-direction: column;
-        width: 100%;
+        gap: 1.5rem;
     }
 
     .btn {
         width: 100%;
+        padding: 0.75rem 1.5rem;
+        font-size: 0.95rem;
     }
 
     .partners-grid {
         grid-template-columns: 1fr;
+        gap: 1.5rem;
+    }
+
+    .partner-logo {
+        padding: 1.5rem;
+    }
+
+    /* Ocultar scroll indicator en móvil */
+    .scroll-indicator {
+        display: none;
     }
 }
 
@@ -1804,19 +2004,191 @@ body::before {
     }
 
     .logo span {
-        display: none; /* Ocultar texto en móviles muy pequeños si el logo es suficiente */
+        display: none;
+    }
+
+    /* Padding aún más reducido en móviles pequeños */
+    .features,
+    .services,
+    .about,
+    .gallery,
+    .contact,
+    .technology,
+    .testimonials,
+    .partners {
+        padding: 2.5rem 0;
     }
 
     .hero {
-        min-height: 500px;
+        min-height: 60vh;
+        padding: 80px 0 30px;
     }
 
     .hero-title {
         font-size: 1.75rem;
+        margin-bottom: 0.75rem;
     }
 
+    .hero-subtitle {
+        font-size: 0.95rem;
+        margin-bottom: 1.5rem;
+    }
+
+    .hero-buttons {
+        margin-bottom: 1.5rem;
+    }
+
+    .hero-stats {
+        margin-top: 1.5rem;
+        padding-top: 1.5rem;
+        gap: 1rem;
+    }
+
+    .hero-stat-number {
+        font-size: 1.75rem;
+    }
+
+    .hero-stat-label {
+        font-size: 0.75rem;
+    }
+
+    .section-title {
+        font-size: 1.5rem;
+    }
+
+    .section-subtitle {
+        font-size: 0.875rem;
+    }
+
+    .section-header {
+        margin-bottom: 2rem;
+    }
+
+    /* Tarjetas aún más compactas */
+    .feature-card,
+    .service-card,
+    .testimonial-card {
+        padding: 1.25rem;
+    }
+
+    .feature-icon {
+        width: 60px;
+        height: 60px;
+        font-size: 1.5rem;
+        margin-bottom: 1rem;
+    }
+
+    .feature-card h3 {
+        font-size: 1.125rem;
+        margin-bottom: 0.5rem;
+    }
+
+    .feature-card p {
+        font-size: 0.875rem;
+    }
+
+    .service-image {
+        height: 120px;
+        font-size: 2.5rem;
+    }
+
+    .service-content h3 {
+        font-size: 1.125rem;
+    }
+
+    .service-content p {
+        font-size: 0.85rem;
+    }
+
+    /* Technology más compacta */
+    .tech-card {
+        padding: 1.5rem;
+    }
+
+    .tech-number {
+        font-size: 2rem;
+    }
+
+    .tech-icon {
+        width: 45px;
+        height: 45px;
+        font-size: 1.125rem;
+    }
+
+    /* About más compacta */
+    .about-description {
+        font-size: 0.95rem;
+        margin-bottom: 1.5rem;
+    }
+
+    .stat-number {
+        font-size: 2rem;
+    }
+
+    .stat-label {
+        font-size: 0.8rem;
+    }
+
+    /* Contact más compacto */
     .contact-form {
         padding: 1.5rem;
+    }
+
+    .contact-item {
+        margin-bottom: 1.25rem;
+    }
+
+    .contact-icon {
+        width: 40px;
+        height: 40px;
+        font-size: 1rem;
+    }
+
+    /* Gallery más compacta */
+    .gallery-grid {
+        gap: 0.75rem;
+    }
+
+    /* Partners más compactos */
+    .partner-logo {
+        padding: 1.25rem;
+    }
+
+    .partner-placeholder i {
+        font-size: 2rem;
+    }
+
+    .partner-placeholder span {
+        font-size: 1rem;
+    }
+
+    .automotive-hero {
+        padding: 3rem 0;
+    }
+
+    .automotive-hero-description {
+        font-size: 0.95rem;
+        margin: 1rem 0 1.5rem;
+    }
+
+    .automotive-benefit {
+        padding: 0.75rem;
+    }
+
+    .automotive-benefit i {
+        font-size: 1.25rem;
+        width: 35px;
+    }
+
+    .automotive-benefit span {
+        font-size: 0.875rem;
+    }
+
+    .automotive-badge {
+        padding: 0.5rem 1rem;
+        font-size: 0.75rem;
+        top: 1rem;
+        right: 1rem;
     }
 }
 

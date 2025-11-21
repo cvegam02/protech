@@ -92,6 +92,18 @@
     background: var(--dark-surface);
 }
 
+@media (max-width: 768px) {
+    .service-overview {
+        padding: 3rem 0;
+    }
+}
+
+@media (max-width: 480px) {
+    .service-overview {
+        padding: 2.5rem 0;
+    }
+}
+
 .service-overview-content {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -128,6 +140,18 @@
 .service-benefits {
     padding: 5rem 0;
     background: var(--dark-bg);
+}
+
+@media (max-width: 768px) {
+    .service-benefits {
+        padding: 3rem 0;
+    }
+}
+
+@media (max-width: 480px) {
+    .service-benefits {
+        padding: 2.5rem 0;
+    }
 }
 
 .benefits-grid {
@@ -186,6 +210,18 @@
 .service-examples {
     padding: 5rem 0;
     background: var(--dark-surface);
+}
+
+@media (max-width: 768px) {
+    .service-examples {
+        padding: 3rem 0;
+    }
+}
+
+@media (max-width: 480px) {
+    .service-examples {
+        padding: 2.5rem 0;
+    }
 }
 
 .examples-grid {
@@ -262,6 +298,18 @@
 .service-projects {
     padding: 5rem 0;
     background: var(--dark-bg);
+}
+
+@media (max-width: 768px) {
+    .service-projects {
+        padding: 3rem 0;
+    }
+}
+
+@media (max-width: 480px) {
+    .service-projects {
+        padding: 2.5rem 0;
+    }
 }
 
 .projects-grid {
@@ -347,6 +395,18 @@
     background: var(--dark-surface);
     position: relative;
     overflow: hidden;
+}
+
+@media (max-width: 768px) {
+    .service-quote {
+        padding: 3rem 0;
+    }
+}
+
+@media (max-width: 480px) {
+    .service-quote {
+        padding: 2.5rem 0;
+    }
 }
 
 .service-quote::before {
@@ -458,6 +518,7 @@
 
     .service-hero-title {
         font-size: 2rem;
+        margin-bottom: 0.75rem;
     }
 
     .service-hero-subtitle {
@@ -466,44 +527,187 @@
 
     .service-overview-text h2 {
         font-size: 1.75rem;
+        margin-bottom: 1rem;
+    }
+
+    .service-overview-text p {
+        font-size: 1rem;
+        margin-bottom: 1rem;
+    }
+
+    .section-header {
+        margin-bottom: 2.5rem;
+    }
+
+    .section-title {
+        font-size: 1.75rem;
+        margin-bottom: 1rem;
+    }
+
+    .section-subtitle {
+        font-size: 0.95rem;
+        margin-top: 0.75rem;
     }
 
     .benefits-grid {
         grid-template-columns: 1fr;
+        gap: 1.5rem;
+        margin-top: 2rem;
+    }
+
+    .benefit-card {
+        padding: 1.5rem;
+    }
+
+    .benefit-icon {
+        width: 60px;
+        height: 60px;
+        font-size: 1.5rem;
+        margin-bottom: 1rem;
+    }
+
+    .benefit-card h3 {
+        font-size: 1.125rem;
+        margin-bottom: 0.5rem;
+    }
+
+    .benefit-card p {
+        font-size: 0.9rem;
+    }
+
+    .examples-grid {
+        gap: 1.5rem;
+        margin-top: 2rem;
+    }
+
+    .example-card {
+        padding: 1.5rem;
+    }
+
+    .example-card h3 {
+        font-size: 1.125rem;
+    }
+
+    .example-card p {
+        font-size: 0.9rem;
     }
 
     .projects-grid {
         grid-template-columns: 1fr;
+        gap: 1.5rem;
+        margin-top: 2rem;
+    }
+
+    .project-card {
+        padding: 1.5rem;
     }
 
     .quote-content h2 {
         font-size: 2rem;
+        margin-bottom: 1rem;
+    }
+
+    .quote-content p {
+        font-size: 1rem;
+        margin-bottom: 1.5rem;
+    }
+
+    .quote-icon {
+        width: 90px;
+        height: 90px;
+        font-size: 2.5rem;
+        margin-bottom: 1.5rem;
     }
 
     .btn-whatsapp {
         width: 100%;
         justify-content: center;
+        padding: 1rem 2rem;
+        font-size: 1rem;
     }
 }
 
 @media (max-width: 480px) {
     .service-hero {
         padding: 80px 0 40px;
+        min-height: 250px;
     }
 
     .service-breadcrumb {
         font-size: 0.75rem;
+        margin-bottom: 1rem;
+    }
+
+    .service-hero-title {
+        font-size: 1.75rem;
+    }
+
+    .service-hero-subtitle {
+        font-size: 0.95rem;
+    }
+
+    .service-overview-text h2 {
+        font-size: 1.5rem;
+    }
+
+    .service-overview-text p {
+        font-size: 0.95rem;
+    }
+
+    .section-title {
+        font-size: 1.5rem;
+    }
+
+    .section-subtitle {
+        font-size: 0.875rem;
     }
 
     .benefit-card,
-    .example-card {
-        padding: 1.5rem;
+    .example-card,
+    .project-card {
+        padding: 1.25rem;
+    }
+
+    .benefit-icon {
+        width: 50px;
+        height: 50px;
+        font-size: 1.25rem;
+    }
+
+    .benefit-card h3 {
+        font-size: 1rem;
+    }
+
+    .benefit-card p {
+        font-size: 0.85rem;
+    }
+
+    .example-card h3 {
+        font-size: 1rem;
+    }
+
+    .example-card p {
+        font-size: 0.85rem;
+    }
+
+    .quote-content h2 {
+        font-size: 1.75rem;
+    }
+
+    .quote-content p {
+        font-size: 0.95rem;
     }
 
     .quote-icon {
         width: 80px;
         height: 80px;
         font-size: 2rem;
+        margin-bottom: 1.25rem;
+    }
+
+    .btn-whatsapp {
+        padding: 0.875rem 1.5rem;
+        font-size: 0.95rem;
     }
 }
 
