@@ -1,0 +1,71 @@
+========================================
+COMANDOS PARA SUBIR A GITHUB
+========================================
+
+Copia y pega estos comandos uno por uno en PowerShell
+después de instalar Git desde: https://git-scm.com/download/win
+
+========================================
+PASO 1: Configurar Git (Solo primera vez)
+========================================
+
+git config --global user.name "Tu Nombre"
+git config --global user.email "tu-email@ejemplo.com"
+
+========================================
+PASO 2: Inicializar y conectar con GitHub
+========================================
+
+git init
+git remote add origin https://github.com/cvegam02/protech.git
+
+========================================
+PASO 3: Agregar archivos
+========================================
+
+git add .
+
+========================================
+PASO 4: Crear commit
+========================================
+
+git commit -m "Initial commit: Sitio web Protech Films completo"
+
+========================================
+PASO 5: Configurar branch y subir
+========================================
+
+git branch -M main
+git push -u origin main
+
+========================================
+NOTAS IMPORTANTES:
+========================================
+
+1. Si Git no está instalado:
+   Descarga desde: https://git-scm.com/download/win
+
+2. Si te pide autenticación:
+   - Ve a: https://github.com/settings/tokens
+   - Genera un "Personal Access Token" con scope "repo"
+   - Usa el token como contraseña cuando Git lo pida
+
+3. Si el remote ya existe:
+   git remote remove origin
+   git remote add origin https://github.com/cvegam02/protech.git
+
+4. Si hay errores de autenticación:
+   Considera usar GitHub Desktop: https://desktop.github.com/
+
+========================================
+COMANDOS ÚTILES PARA EL FUTURO:
+========================================
+
+Ver estado:              git status
+Agregar cambios:         git add .
+Hacer commit:            git commit -m "Descripción"
+Subir cambios:           git push
+Actualizar desde GitHub: git pull
+
+========================================
+
