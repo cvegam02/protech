@@ -170,3 +170,4 @@ git push -u origin main
 
 El archivo `.gitignore` ya está configurado para excluir archivos temporales y del sistema.
 
+
