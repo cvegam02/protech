@@ -1,0 +1,64 @@
+# Reglas del Proyecto - Protech Films
+
+## IMPORTANTE: Aplicación de Estilos en Todas las Páginas
+
+**CRÍTICO**: Cuando se realicen cambios en estilos CSS, fuentes, colores, o elementos de diseño, estos cambios DEBEN aplicarse en TODAS las páginas del sitio:
+
+1. **index.html** - Página principal
+2. **servicio-vehiculos.html** - Página de servicio de vehículos
+3. **servicio-residencial.html** - Página de servicio residencial
+4. **servicio-comercial.html** - Página de servicio comercial
+5. **servicio-industrial.html** - Página de servicio industrial
+
+### Archivos CSS a actualizar:
+- **styles.css** - Estilos principales (aplicados a index.html)
+- **service-page.css** - Estilos específicos de páginas de servicios
+
+### Checklist de cambios que requieren aplicación en todas las páginas:
+- [ ] Cambios en tipografías (fuentes, tamaños, pesos)
+- [ ] Cambios en paleta de colores
+- [ ] Cambios en botones y estilos de botones
+- [ ] Cambios en navbar/header
+- [ ] Cambios en footer
+- [ ] Cambios en elementos decorativos (hexágonos, formas)
+- [ ] Cambios en responsive design
+- [ ] Cambios en animaciones y transiciones
+- [ ] Cambios en logos o imágenes del header/footer
+
+## Manual de Marca
+
+### Paleta de Colores Oficial:
+- Azul Hexagonal: `#0A2438` (--brand-blue)
+- Negro Técnico: `#111111` (--tech-black)
+- Gris Claro: `#E5E5E5` (--light-gray)
+- Blanco Puro: `#FFFFFF` (--white)
+
+**NO usar colores neón (verde/azul neón) - solo colores del manual de marca**
+
+### Tipografías:
+- Títulos (H1, H2): Rajdhani Bold (alternativa a Oxima Bold)
+- Texto general: Inter Regular/Medium
+
+### Elementos de Diseño:
+- Figuras hexagonales deben tener presencia prominente
+- Líneas limpias y contrastes de color fuertes
+- Estilo moderno, tecnológico y premium
+- Botones amplios con bordes suaves y colores contrastantes
+
+## Estructura del Proyecto
+
+- `index.html` - Página principal
+- `servicio-*.html` - Páginas individuales de servicios
+- `styles.css` - Estilos principales
+- `service-page.css` - Estilos para páginas de servicios
+- `script.js` - JavaScript principal
+- `imgs/` - Carpeta de imágenes y videos
+
+## Notas Importantes
+
+- El logo en el navbar usa video: `imgs/PROTECH_1080p.mp4`
+- Todas las páginas deben ser 100% responsive
+- Mantener consistencia visual en todo el sitio
+- Aplicar cambios de branding en todas las páginas simultáneamente
+
+
