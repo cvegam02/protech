@@ -364,3 +364,142 @@ const throttledScroll = throttle(() => {
 
 window.addEventListener('scroll', throttledScroll);
 
+// ============================================
+// GOOGLE MAPS REVIEWS INTEGRATION
+// ============================================
+
+/**
+ * Función para cargar reseñas de Google Maps
+ * 
+ * OPCIÓN 1: Manual - Actualiza las reseñas directamente en el HTML
+ * OPCIÓN 2: Automática - Usa la API de Google Places (requiere API key)
+ * 
+ * Para usar la API automática:
+ * 1. Obtén una API key de Google Cloud Console
+ * 2. Habilita la API de Places
+ * 3. Reemplaza 'YOUR_API_KEY' y 'YOUR_PLACE_ID' abajo
+ * 4. Descomenta la función loadGoogleReviews()
+ */
+
+// Configuración (descomenta y configura si usas API)
+// const GOOGLE_PLACES_API_KEY = 'YOUR_API_KEY';
+// const GOOGLE_PLACE_ID = 'YOUR_PLACE_ID'; // Obtén el Place ID desde Google Maps
+
+/**
+ * Carga reseñas desde Google Places API
+ * Requiere: API key de Google Cloud Platform con Places API habilitada
+ */
+async function loadGoogleReviews() {
+    const testimonialsContainer = document.querySelector('.testimonials-grid');
+    if (!testimonialsContainer) return;
+
+    // Si no hay API key configurada, no hacer nada
+    if (!GOOGLE_PLACES_API_KEY || !GOOGLE_PLACE_ID) {
+        console.log('Google Reviews: API key no configurada. Usando reseñas manuales.');
+        return;
+    }
+
+    try {
+        // Cargar el script de Google Maps si no está cargado
+        if (!window.google || !window.google.maps) {
+            await loadGoogleMapsScript();
+        }
+
+        const service = new google.maps.places.PlacesService(document.createElement('div'));
+        
+        service.getDetails({
+            placeId: GOOGLE_PLACE_ID,
+            fields: ['reviews', 'name', 'rating']
+        }, (place, status) => {
+            if (status === google.maps.places.PlacesServiceStatus.OK && place.reviews) {
+                testimonialsContainer.innerHTML = '';
+                
+                // Mostrar las primeras 3 reseñas
+                place.reviews.slice(0, 3).forEach(review => {
+                    const testimonialCard = createTestimonialCard(
+                        review.rating,
+                        review.text,
+                        review.author_name,
+                        review.relative_time_description || 'Cliente'
+                    );
+                    testimonialsContainer.appendChild(testimonialCard);
+                });
+            } else {
+                console.log('No se pudieron cargar las reseñas de Google Maps');
+            }
+        });
+    } catch (error) {
+        console.error('Error cargando reseñas de Google:', error);
+    }
+}
+
+/**
+ * Carga el script de Google Maps
+ */
+function loadGoogleMapsScript() {
+    return new Promise((resolve, reject) => {
+        if (window.google && window.google.maps) {
+            resolve();
+            return;
+        }
+
+        const script = document.createElement('script');
+        script.src = `https://maps.googleapis.com/maps/api/js?key=${GOOGLE_PLACES_API_KEY}&libraries=places`;
+        script.async = true;
+        script.defer = true;
+        script.onload = resolve;
+        script.onerror = reject;
+        document.head.appendChild(script);
+    });
+}
+
+/**
+ * Crea una tarjeta de testimonio
+ */
+function createTestimonialCard(rating, text, authorName, authorRole) {
+    const card = document.createElement('div');
+    card.className = 'testimonial-card';
+    
+    // Crear estrellas
+    const ratingDiv = document.createElement('div');
+    ratingDiv.className = 'testimonial-rating';
+    for (let i = 0; i < 5; i++) {
+        const star = document.createElement('i');
+        star.className = i < rating ? 'fas fa-star' : 'far fa-star';
+        ratingDiv.appendChild(star);
+    }
+    
+    // Texto del testimonio
+    const textP = document.createElement('p');
+    textP.className = 'testimonial-text';
+    textP.textContent = `"${text}"`;
+    
+    // Autor
+    const authorDiv = document.createElement('div');
+    authorDiv.className = 'testimonial-author';
+    
+    const avatar = document.createElement('div');
+    avatar.className = 'author-avatar';
+    avatar.innerHTML = '<i class="fas fa-user"></i>';
+    
+    const authorInfo = document.createElement('div');
+    authorInfo.className = 'author-info';
+    authorInfo.innerHTML = `
+        <h4>${authorName}</h4>
+        <p>${authorRole}</p>
+    `;
+    
+    authorDiv.appendChild(avatar);
+    authorDiv.appendChild(authorInfo);
+    
+    card.appendChild(ratingDiv);
+    card.appendChild(textP);
+    card.appendChild(authorDiv);
+    
+    return card;
+}
+
+// Cargar reseñas cuando el DOM esté listo
+// Descomenta la siguiente línea si quieres usar la API automática:
+// document.addEventListener('DOMContentLoaded', loadGoogleReviews);
+

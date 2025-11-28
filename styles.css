@@ -1734,15 +1734,16 @@ body::after {
 }
 
 .contact-info {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
 }
 
 .contact-item {
     display: flex;
-    flex-direction: column;
-    gap: 0.75rem;
+    flex-direction: row;
+    align-items: flex-start;
+    gap: 1rem;
     padding: 1.25rem;
     background: var(--white);
     border-radius: 10px;
@@ -2080,7 +2081,7 @@ body::after {
     }
 
     .contact-info {
-        grid-template-columns: 1fr;
+        flex-direction: column;
         gap: 1rem;
     }
 
