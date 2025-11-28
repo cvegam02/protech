@@ -178,17 +178,17 @@ document.addEventListener('DOMContentLoaded', () => {
 // COUNTER ANIMATION
 // ============================================
 
-function animateCounter(element, target, duration = 2000) {
+function animateCounter(element, target, suffix = '', duration = 2000) {
     let start = 0;
     const increment = target / (duration / 16);
     
     const timer = setInterval(() => {
         start += increment;
         if (start >= target) {
-            element.textContent = target + (target === 98 ? '%' : target === 500 ? '+' : '');
+            element.textContent = target + suffix;
             clearInterval(timer);
         } else {
-            element.textContent = Math.floor(start) + (target === 98 ? '%' : target === 500 ? '+' : '');
+            element.textContent = Math.floor(start) + suffix;
         }
     }, 16);
 }
@@ -197,9 +197,16 @@ const statsObserver = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
         if (entry.isIntersecting && !entry.target.classList.contains('counted')) {
             const statNumber = entry.target.querySelector('.stat-number');
-            const target = parseInt(statNumber.getAttribute('data-target'));
-            entry.target.classList.add('counted');
-            animateCounter(statNumber, target);
+            const targetValue = statNumber.getAttribute('data-target');
+            
+            // Extraer el número y el sufijo (+, %, etc.)
+            const match = targetValue.match(/^(\d+)(.*)$/);
+            if (match) {
+                const target = parseInt(match[1]);
+                const suffix = match[2] || '';
+                entry.target.classList.add('counted');
+                animateCounter(statNumber, target, suffix);
+            }
         }
     });
 }, { threshold: 0.5 });
