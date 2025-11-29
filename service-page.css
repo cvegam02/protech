@@ -33,6 +33,13 @@
     filter: brightness(0.4);
 }
 
+.service-hero-video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    filter: brightness(0.4);
+}
+
 .service-hero-overlay {
     position: absolute;
     top: 0;
@@ -142,6 +149,15 @@
     width: 100%;
     height: auto;
     display: block;
+}
+
+.service-overview-video {
+    width: 100%;
+    max-height: 500px;
+    height: auto;
+    display: block;
+    border-radius: 12px;
+    object-fit: cover;
 }
 
 /* Service Benefits */

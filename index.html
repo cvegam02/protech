@@ -39,7 +39,7 @@
     <section id="home" class="hero">
         <div class="hero-video-bg">
             <video class="hero-video" autoplay muted loop playsinline>
-                <source src="https://aa59ef9d54e5c47211435046a160eebe.cdn.bubble.io/f1738360046352x622107054889192700/158316-816359649.mp4" type="video/mp4">
+                <source src="imgs/landing.mp4" type="video/mp4">
             </video>
             <div class="hero-pattern"></div>
         </div>
@@ -140,7 +140,7 @@
                 </div>
                 <div class="automotive-hero-image">
                     <div class="automotive-image-wrapper">
-                        <img src="https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?w=800&q=80" alt="Vehículo Polarizado" loading="lazy">
+                        <img src="imgs/auto2.jpg" alt="Vehículo Polarizado" loading="lazy">
                         <div class="automotive-badge">
                             <i class="fas fa-star"></i>
                             <span>Servicio #1</span>
@@ -456,7 +456,7 @@
                     </div>
                 </div>
                 <div class="about-image">
-                    <img src="imgs/company.jpg" alt="Protech Films - Nuestra Empresa" class="about-img">
+                    <img src="imgs/auto1.jpg" alt="Protech Films - Nuestra Empresa" class="about-img">
                 </div>
             </div>
         </div>
@@ -469,73 +469,37 @@
                 <h2 class="section-title">Galería de Proyectos</h2>
                 <p class="section-subtitle">Algunos de nuestros trabajos realizados</p>
             </div>
-            <div class="gallery-grid">
-                <div class="gallery-item">
-                    <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=800&q=80" alt="Proyecto Residencial" loading="lazy">
-                    <div class="gallery-overlay">
-                        <h4>Proyecto Residencial</h4>
-                        <p>Ventanas con control solar</p>
-                    </div>
-                </div>
-                <div class="gallery-item">
-                    <img src="https://images.unsplash.com/photo-1497366216548-37526070297c?w=800&q=80" alt="Oficina Corporativa" loading="lazy">
-                    <div class="gallery-overlay">
-                        <h4>Oficina Corporativa</h4>
-                        <p>Protección solar profesional</p>
-                    </div>
-                </div>
-                <div class="gallery-item">
-                    <img src="https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?w=800&q=80" alt="Vehículo Premium" loading="lazy">
-                    <div class="gallery-overlay">
-                        <h4>Vehículo Premium</h4>
-                        <p>Tintado profesional</p>
-                    </div>
-                </div>
-                <div class="gallery-item">
-                    <img src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=800&q=80" alt="Proyecto Comercial" loading="lazy">
-                    <div class="gallery-overlay">
-                        <h4>Proyecto Comercial</h4>
-                        <p>Seguridad reforzada</p>
-                    </div>
-                </div>
-                <div class="gallery-item">
-                    <img src="https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=800&q=80" alt="Instalación Residencial" loading="lazy">
-                    <div class="gallery-overlay">
-                        <h4>Instalación Residencial</h4>
-                        <p>Control de temperatura</p>
-                    </div>
-                </div>
-                <div class="gallery-item">
-                    <img src="https://images.unsplash.com/photo-1600607687644-c7171b42498b?w=800&q=80" alt="Proyecto Moderno" loading="lazy">
-                    <div class="gallery-overlay">
-                        <h4>Proyecto Moderno</h4>
-                        <p>Protección UV avanzada</p>
-                    </div>
-                </div>
-                <div class="gallery-item">
-                    <img src="https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?w=800&q=80" alt="Edificio Corporativo" loading="lazy">
-                    <div class="gallery-overlay">
-                        <h4>Edificio Corporativo</h4>
-                        <p>Eficiencia energética</p>
-                    </div>
-                </div>
-                <div class="gallery-item">
-                    <img src="https://images.unsplash.com/photo-1600585154526-990dced4db0d?w=800&q=80" alt="Ventanas Residenciales" loading="lazy">
-                    <div class="gallery-overlay">
-                        <h4>Ventanas Residenciales</h4>
-                        <p>Privacidad y protección</p>
-                    </div>
-                </div>
-                <div class="gallery-item">
-                    <img src="https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?w=800&q=80" alt="Proyecto Industrial" loading="lazy">
-                    <div class="gallery-overlay">
-                        <h4>Proyecto Industrial</h4>
-                        <p>Instalación a gran escala</p>
-                    </div>
-                </div>
+            <div class="gallery-grid" id="galleryGrid">
+                <!-- Los proyectos se cargarán dinámicamente desde JavaScript -->
             </div>
         </div>
     </section>
+
+    <!-- Gallery Modal -->
+    <div class="gallery-modal" id="galleryModal">
+        <div class="modal-overlay" id="modalOverlay"></div>
+        <div class="modal-content">
+            <button class="modal-close" id="modalClose" aria-label="Cerrar">
+                <i class="fas fa-times"></i>
+            </button>
+            <button class="modal-nav modal-prev" id="modalPrev" aria-label="Imagen anterior">
+                <i class="fas fa-chevron-left"></i>
+            </button>
+            <button class="modal-nav modal-next" id="modalNext" aria-label="Imagen siguiente">
+                <i class="fas fa-chevron-right"></i>
+            </button>
+            <div class="modal-header">
+                <h3 class="modal-title" id="modalTitle"></h3>
+                <p class="modal-location" id="modalLocation"></p>
+            </div>
+            <div class="modal-carousel" id="modalCarousel">
+                <!-- Las imágenes se cargarán dinámicamente -->
+            </div>
+            <div class="modal-counter" id="modalCounter">
+                <!-- El contador se generará dinámicamente -->
+            </div>
+        </div>
+    </div>
 
     <!-- Contact Section -->
     <section id="contact" class="contact">

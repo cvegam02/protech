@@ -510,3 +510,287 @@ function createTestimonialCard(rating, text, authorName, authorRole) {
 // Descomenta la siguiente línea si quieres usar la API automática:
 // document.addEventListener('DOMContentLoaded', loadGoogleReviews);
 
+// ============================================
+// GALLERY PROJECTS - Dynamic Loading
+// ============================================
+
+/**
+ * Lista de proyectos disponibles
+ * Formato: { folder: "Nombre Proyecto - Ciudad Estado", images: ["imagen1.jpg", "imagen2.jpg", ...] }
+ */
+const projects = [
+    {
+        folder: "Aeropuerto Internacional de Ciudad Obregón - Ciudad Obregon Sonora",
+        images: ["Aeropuerto-obr.jpg"]
+    },
+    {
+        folder: "Mazda - Ciudad Obregon Sonora",
+        images: ["20241108_200332.jpg", "20241108_200348.jpg", "mazda-obr.jpg"]
+    },
+    {
+        folder: "Residencia en San Carlos - San Carlos Sonora",
+        images: ["20230923_162124.jpg", "20230923_162207.jpg"]
+    }
+];
+
+/**
+ * Extrae el nombre del proyecto y la ciudad del nombre de la carpeta
+ * Formato esperado: "Nombre Proyecto - Ciudad Estado"
+ */
+function parseProjectFolder(folderName) {
+    const parts = folderName.split(' - ');
+    if (parts.length >= 2) {
+        return {
+            name: parts[0].trim(),
+            location: parts.slice(1).join(' - ').trim()
+        };
+    }
+    return {
+        name: folderName,
+        location: ''
+    };
+}
+
+/**
+ * Genera un elemento de galería para un proyecto
+ */
+function createGalleryItem(project, index) {
+    const { name, location } = parseProjectFolder(project.folder);
+    const imagePath = `imgs/proyectos/${project.folder}/${project.images[0]}`;
+    
+    const galleryItem = document.createElement('div');
+    galleryItem.className = 'gallery-item';
+    galleryItem.dataset.projectIndex = index;
+    
+    const img = document.createElement('img');
+    img.src = imagePath;
+    img.alt = name;
+    img.loading = 'lazy';
+    
+    // Manejar errores de carga de imagen
+    img.onerror = function() {
+        console.warn(`No se pudo cargar la imagen: ${imagePath}`);
+        this.style.display = 'none';
+    };
+    
+    const overlay = document.createElement('div');
+    overlay.className = 'gallery-overlay';
+    
+    const title = document.createElement('h4');
+    title.textContent = name;
+    
+    const locationText = document.createElement('p');
+    locationText.textContent = location || 'Proyecto completado';
+    
+    overlay.appendChild(title);
+    overlay.appendChild(locationText);
+    
+    galleryItem.appendChild(img);
+    galleryItem.appendChild(overlay);
+    
+    // Agregar event listener para abrir el modal
+    galleryItem.addEventListener('click', () => openGalleryModal(index));
+    
+    return galleryItem;
+}
+
+/**
+ * Carga y renderiza los proyectos en la galería
+ */
+function loadGalleryProjects() {
+    const galleryGrid = document.getElementById('galleryGrid');
+    if (!galleryGrid) return;
+    
+    // Limpiar galería existente
+    galleryGrid.innerHTML = '';
+    
+    // Generar elementos para cada proyecto
+    projects.forEach((project, index) => {
+        const galleryItem = createGalleryItem(project, index);
+        galleryGrid.appendChild(galleryItem);
+    });
+    
+    // Re-aplicar observador de animaciones a los nuevos elementos
+    const newItems = galleryGrid.querySelectorAll('.gallery-item');
+    newItems.forEach(item => {
+        item.classList.add('fade-in');
+        observer.observe(item);
+    });
+}
+
+// Cargar proyectos cuando el DOM esté listo
+document.addEventListener('DOMContentLoaded', loadGalleryProjects);
+
+// ============================================
+// GALLERY MODAL - Carousel Functionality
+// ============================================
+
+let currentProjectIndex = 0;
+let currentImageIndex = 0;
+
+/**
+ * Abre el modal de galería con el proyecto seleccionado
+ */
+function openGalleryModal(projectIndex) {
+    currentProjectIndex = projectIndex;
+    currentImageIndex = 0;
+    
+    const project = projects[projectIndex];
+    if (!project) return;
+    
+    const { name, location } = parseProjectFolder(project.folder);
+    const modal = document.getElementById('galleryModal');
+    const modalTitle = document.getElementById('modalTitle');
+    const modalLocation = document.getElementById('modalLocation');
+    const modalCarousel = document.getElementById('modalCarousel');
+    const modalCounter = document.getElementById('modalCounter');
+    
+    // Configurar título y ubicación
+    modalTitle.textContent = name;
+    modalLocation.textContent = location || 'Proyecto completado';
+    
+    // Limpiar carrusel y contador
+    modalCarousel.innerHTML = '';
+    modalCounter.innerHTML = '';
+    
+    // Crear imágenes del carrusel
+    project.images.forEach((image, index) => {
+        const imagePath = `imgs/proyectos/${project.folder}/${image}`;
+        
+        // Imagen del carrusel
+        const carouselItem = document.createElement('div');
+        carouselItem.className = 'carousel-item';
+        if (index === 0) carouselItem.classList.add('active');
+        
+        const img = document.createElement('img');
+        img.src = imagePath;
+        img.alt = `${name} - Imagen ${index + 1}`;
+        img.loading = 'lazy';
+        
+        carouselItem.appendChild(img);
+        modalCarousel.appendChild(carouselItem);
+        
+        // Punto del contador
+        const counterDot = document.createElement('div');
+        counterDot.className = 'counter-dot';
+        if (index === 0) counterDot.classList.add('active');
+        counterDot.setAttribute('aria-label', `Imagen ${index + 1} de ${project.images.length}`);
+        counterDot.addEventListener('click', () => goToImage(index));
+        modalCounter.appendChild(counterDot);
+    });
+    
+    // Mostrar modal
+    modal.classList.add('active');
+    document.body.style.overflow = 'hidden';
+    
+    // Actualizar navegación
+    updateModalNavigation();
+}
+
+/**
+ * Cierra el modal de galería
+ */
+function closeGalleryModal() {
+    const modal = document.getElementById('galleryModal');
+    modal.classList.remove('active');
+    document.body.style.overflow = '';
+}
+
+/**
+ * Navega a una imagen específica
+ */
+function goToImage(imageIndex) {
+    const project = projects[currentProjectIndex];
+    if (!project || imageIndex < 0 || imageIndex >= project.images.length) return;
+    
+    currentImageIndex = imageIndex;
+    
+    // Actualizar carrusel
+    const carouselItems = document.querySelectorAll('.carousel-item');
+    const counterDots = document.querySelectorAll('.counter-dot');
+    
+    carouselItems.forEach((item, index) => {
+        item.classList.toggle('active', index === imageIndex);
+    });
+    
+    counterDots.forEach((dot, index) => {
+        dot.classList.toggle('active', index === imageIndex);
+    });
+    
+    updateModalNavigation();
+}
+
+/**
+ * Navega a la imagen anterior
+ */
+function prevImage() {
+    const project = projects[currentProjectIndex];
+    if (!project) return;
+    
+    const newIndex = currentImageIndex > 0 ? currentImageIndex - 1 : project.images.length - 1;
+    goToImage(newIndex);
+}
+
+/**
+ * Navega a la imagen siguiente
+ */
+function nextImage() {
+    const project = projects[currentProjectIndex];
+    if (!project) return;
+    
+    const newIndex = currentImageIndex < project.images.length - 1 ? currentImageIndex + 1 : 0;
+    goToImage(newIndex);
+}
+
+/**
+ * Actualiza el estado de los botones de navegación
+ */
+function updateModalNavigation() {
+    const project = projects[currentProjectIndex];
+    if (!project) return;
+    
+    const prevBtn = document.getElementById('modalPrev');
+    const nextBtn = document.getElementById('modalNext');
+    
+    // Los botones siempre están habilitados (carrusel circular)
+    if (prevBtn) prevBtn.style.opacity = '1';
+    if (nextBtn) nextBtn.style.opacity = '1';
+}
+
+// Event listeners para el modal
+document.addEventListener('DOMContentLoaded', () => {
+    const modal = document.getElementById('galleryModal');
+    const modalClose = document.getElementById('modalClose');
+    const modalOverlay = document.getElementById('modalOverlay');
+    const modalPrev = document.getElementById('modalPrev');
+    const modalNext = document.getElementById('modalNext');
+    
+    if (modalClose) {
+        modalClose.addEventListener('click', closeGalleryModal);
+    }
+    
+    if (modalOverlay) {
+        modalOverlay.addEventListener('click', closeGalleryModal);
+    }
+    
+    if (modalPrev) {
+        modalPrev.addEventListener('click', prevImage);
+    }
+    
+    if (modalNext) {
+        modalNext.addEventListener('click', nextImage);
+    }
+    
+    // Cerrar con tecla ESC
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && modal.classList.contains('active')) {
+            closeGalleryModal();
+        }
+        // Navegación con flechas del teclado
+        if (modal.classList.contains('active')) {
+            if (e.key === 'ArrowLeft') prevImage();
+            if (e.key === 'ArrowRight') nextImage();
+        }
+    });
+});
+
