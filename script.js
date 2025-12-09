@@ -197,7 +197,16 @@ const statsObserver = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
         if (entry.isIntersecting && !entry.target.classList.contains('counted')) {
             const statNumber = entry.target.querySelector('.stat-number');
+            if (!statNumber) {
+                console.warn('No se encontró .stat-number en:', entry.target);
+                return;
+            }
+            
             const targetValue = statNumber.getAttribute('data-target');
+            if (!targetValue) {
+                console.warn('No se encontró data-target en:', statNumber);
+                return;
+            }
             
             // Extraer el número y el sufijo (+, %, etc.)
             const match = targetValue.match(/^(\d+)(.*)$/);
@@ -206,17 +215,32 @@ const statsObserver = new IntersectionObserver((entries) => {
                 const suffix = match[2] || '';
                 entry.target.classList.add('counted');
                 animateCounter(statNumber, target, suffix);
+            } else {
+                console.warn('No se pudo parsear data-target:', targetValue);
             }
         }
     });
 }, { threshold: 0.5 });
 
-document.addEventListener('DOMContentLoaded', () => {
+// Inicializar observer de stats
+function initStatsObserver() {
     const statItems = document.querySelectorAll('.stat-item');
-    statItems.forEach(item => {
-        statsObserver.observe(item);
-    });
-});
+    if (statItems.length > 0) {
+        console.log('Inicializando observer de stats para', statItems.length, 'elementos');
+        statItems.forEach(item => {
+            statsObserver.observe(item);
+        });
+    } else {
+        console.warn('No se encontraron elementos .stat-item');
+    }
+}
+
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initStatsObserver);
+} else {
+    // Si el DOM ya está cargado, ejecutar inmediatamente
+    initStatsObserver();
+}
 
 // ============================================
 // FORM HANDLING
@@ -242,13 +266,6 @@ if (contactForm) {
         setTimeout(() => {
             submitButton.textContent = '✓ Enviando...';
         }, 1000);
-    });
-}
-        //     // Handle success
-        // })
-        // .catch(error => {
-        //     // Handle error
-        // });
     });
 }
 
@@ -589,14 +606,39 @@ function loadGalleryProjects() {
     
     // Re-aplicar observador de animaciones a los nuevos elementos
     const newItems = galleryGrid.querySelectorAll('.gallery-item');
-    newItems.forEach(item => {
-        item.classList.add('fade-in');
-        observer.observe(item);
-    });
+    if (typeof observer !== 'undefined' && observer) {
+        newItems.forEach(item => {
+            item.classList.add('fade-in');
+            observer.observe(item);
+        });
+    } else {
+        // Si el observer no está disponible, solo agregar las clases
+        newItems.forEach(item => {
+            item.classList.add('fade-in', 'visible');
+        });
+    }
+    
+    console.log('Galería: Proyectos renderizados:', newItems.length);
 }
 
 // Cargar proyectos cuando el DOM esté listo
-document.addEventListener('DOMContentLoaded', loadGalleryProjects);
+function initGalleryProjects() {
+    const galleryGrid = document.getElementById('galleryGrid');
+    if (galleryGrid) {
+        console.log('Cargando proyectos de galería...');
+        loadGalleryProjects();
+        console.log('Proyectos cargados:', projects.length);
+    } else {
+        console.warn('No se encontró el elemento galleryGrid');
+    }
+}
+
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initGalleryProjects);
+} else {
+    // Si el DOM ya está cargado, ejecutar después de un pequeño delay
+    setTimeout(initGalleryProjects, 100);
+}
 
 // ============================================
 // GALLERY MODAL - Carousel Functionality
