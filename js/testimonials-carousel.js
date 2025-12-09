@@ -13,19 +13,10 @@
         const nextBtn = document.getElementById('testimonialsNext');
         
         if (!carousel || !track || !grid || !prevBtn || !nextBtn) {
-            console.log('Elementos del carrusel no encontrados:', {
-                carousel: !!carousel,
-                track: !!track,
-                grid: !!grid,
-                prevBtn: !!prevBtn,
-                nextBtn: !!nextBtn
-            });
             // Reintentar después de que se carguen los reviews de Google
             setTimeout(initTestimonialsCarousel, 1000);
             return;
         }
-        
-        console.log('Carrusel inicializado correctamente');
         
         let currentIndex = 0;
         let cardsPerView = 3; // Por defecto 3 en desktop
@@ -47,7 +38,6 @@
             const totalCards = cards.length;
             
             if (totalCards === 0) {
-                console.log('No hay tarjetas para mostrar');
                 return;
             }
             
@@ -66,14 +56,6 @@
             const translateX = -(currentIndex * (cardWidth + gap));
             
             grid.style.transform = `translateX(${translateX}px)`;
-            
-            console.log('Carrusel actualizado:', {
-                currentIndex,
-                maxIndex,
-                totalCards,
-                cardsPerView,
-                translateX
-            });
             
             // Actualizar estado de los botones
             prevBtn.disabled = currentIndex === 0;
@@ -98,8 +80,6 @@
             const totalCards = cards.length;
             const maxIndex = Math.max(0, totalCards - cardsPerView);
             
-            console.log('Siguiente click:', { currentIndex, maxIndex, totalCards, cardsPerView });
-            
             if (currentIndex < maxIndex) {
                 currentIndex++;
                 updateCarousel();
@@ -107,8 +87,6 @@
         }
         
         function prevSlide() {
-            console.log('Anterior click:', { currentIndex });
-            
             if (currentIndex > 0) {
                 currentIndex--;
                 updateCarousel();
@@ -137,7 +115,6 @@
                         node.classList && node.classList.contains('testimonial-card')
                     );
                     if (newCards.length > 0) {
-                        console.log('Cambios detectados en el grid, actualizando carrusel...');
                         updateCarousel();
                     }
                 }

@@ -9,9 +9,7 @@
     if (heroVideo) {
         // Asegurar que el video se reproduzca
         heroVideo.addEventListener('loadedmetadata', () => {
-            heroVideo.play().catch(err => {
-                console.log('Video autoplay prevented:', err);
-            });
+            heroVideo.play().catch(() => {});
         });
 
         // Reintentar reproducción si falla
@@ -21,7 +19,6 @@
 
         // Manejar errores de carga
         heroVideo.addEventListener('error', () => {
-            console.log('Error loading video, falling back to background image');
             const heroVideoBg = document.querySelector('.hero-video-bg');
             if (heroVideoBg) {
                 heroVideoBg.style.background = 

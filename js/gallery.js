@@ -60,7 +60,6 @@
         
         // Manejar errores de carga de imagen
         img.onerror = function() {
-            console.warn(`No se pudo cargar la imagen: ${imagePath}`);
             this.style.display = 'none';
         };
         
@@ -110,19 +109,13 @@
         newItems.forEach(item => {
             item.classList.add('fade-in', 'visible');
         });
-        
-        console.log('Galería: Proyectos renderizados:', newItems.length);
     }
 
     // Cargar proyectos cuando el DOM esté listo
     function initGalleryProjects() {
         const galleryGrid = document.getElementById('galleryGrid');
         if (galleryGrid) {
-            console.log('Cargando proyectos de galería...');
             loadGalleryProjects();
-            console.log('Proyectos cargados:', projects.length);
-        } else {
-            console.warn('No se encontró el elemento galleryGrid');
         }
     }
 

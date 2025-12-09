@@ -53,7 +53,6 @@
         const modalCounter = document.getElementById('modalCounter');
         
         if (!modal || !modalTitle || !modalLocation || !modalCarousel || !modalCounter) {
-            console.warn('Elementos del modal no encontrados');
             return;
         }
         

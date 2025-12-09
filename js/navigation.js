@@ -12,7 +12,6 @@
         
         // Verificar que el navbar exista
         if (!navbar) {
-            console.log('Navbar no encontrado, reintentando...');
             setTimeout(initNavbarFunctionality, 200);
             return;
         }

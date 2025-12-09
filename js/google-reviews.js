@@ -24,7 +24,6 @@ async function fetchGoogleReviews() {
     
     // Usar Places API (New) - Compatible con CORS y más moderna
     try {
-        console.log('Obteniendo reviews con Places API (New)...');
         const url = `https://places.googleapis.com/v1/places/${placeId}?fields=id,displayName,rating,userRatingCount,reviews&languageCode=${language}&key=${apiKey}`;
         
         const response = await fetch(url, {
@@ -38,12 +37,11 @@ async function fetchGoogleReviews() {
         
         if (!response.ok) {
             const errorText = await response.text();
-            console.error('Error en respuesta:', response.status, errorText);
+            console.error('Error al obtener reviews:', response.status, errorText);
             throw new Error(`Error ${response.status}: ${response.statusText}`);
         }
         
         const data = await response.json();
-        console.log('Reviews obtenidas exitosamente:', data);
         return data;
     } catch (error) {
         console.error('Error al obtener reviews:', error);
@@ -149,7 +147,6 @@ function formatReviewDate(dateString) {
             // Si es más de un año
             return `Hace ${diffYears} ${diffYears === 1 ? 'año' : 'años'}`;
         } catch (error) {
-            console.warn('Error al formatear fecha:', error);
             // Si falla, intentar mostrar la fecha en formato corto
             try {
                 const date = new Date(dateString);
@@ -212,7 +209,6 @@ function generateStars(rating) {
  */
 function renderReviews(reviewsData) {
     if (!reviewsData || !reviewsData.reviews || reviewsData.reviews.length === 0) {
-        console.warn('No hay reviews disponibles para mostrar');
         return;
     }
     
@@ -221,8 +217,6 @@ function renderReviews(reviewsData) {
         console.error('No se encontró el elemento testimonialsGrid');
         return;
     }
-    
-    console.log('Renderizando', reviewsData.reviews.length, 'reviews');
     
     // Limpiar testimonios estáticos completamente
     testimonialsGrid.innerHTML = '';
@@ -259,10 +253,6 @@ function renderReviews(reviewsData) {
     
     // Actualizar rating promedio en el header si existe
     updateRatingHeader(reviewsData);
-    
-    // Notificar al carrusel que se actualizaron los reviews
-    // El MutationObserver en script.js detectará los cambios automáticamente
-    console.log('Reviews renderizadas, el carrusel se actualizará automáticamente');
 }
 
 /**
@@ -317,7 +307,6 @@ async function initGoogleReviews() {
     
     const testimonialsGrid = document.getElementById('testimonialsGrid');
     if (!testimonialsGrid) {
-        console.warn('No se encontró el contenedor de testimonios');
         return;
     }
     
@@ -327,18 +316,9 @@ async function initGoogleReviews() {
     testimonialsGrid.parentElement.insertBefore(loadingIndicator, testimonialsGrid);
     
     try {
-        console.log('=== INICIANDO CARGA DE GOOGLE REVIEWS ===');
-        console.log('Configuración:', {
-            apiKey: GOOGLE_PLACES_CONFIG.apiKey ? 'CONFIGURADO' : 'NO CONFIGURADO',
-            placeId: GOOGLE_PLACES_CONFIG.placeId,
-            maxReviews: GOOGLE_PLACES_CONFIG.maxReviews
-        });
-        
         const placeData = await fetchGoogleReviews();
-        console.log('Datos recibidos de API:', placeData);
         
         if (!placeData) {
-            console.warn('No se recibieron datos de la API');
             if (loadingIndicator.parentElement) {
                 loadingIndicator.remove();
             }
@@ -346,13 +326,10 @@ async function initGoogleReviews() {
         }
         
         const reviewsData = formatReviews(placeData);
-        console.log('Reviews formateadas:', reviewsData);
         
         if (reviewsData && reviewsData.reviews && reviewsData.reviews.length > 0) {
             renderReviews(reviewsData);
-            console.log('✅ Reviews renderizadas exitosamente:', reviewsData.reviews.length);
         } else {
-            console.warn('⚠️ No se pudieron cargar las reviews. Datos:', reviewsData);
             // Mostrar mensaje al usuario
             testimonialsGrid.innerHTML = `
                 <div class="testimonial-card" style="grid-column: 1 / -1; text-align: center; padding: 2rem;">
@@ -361,8 +338,7 @@ async function initGoogleReviews() {
             `;
         }
     } catch (error) {
-        console.error('❌ Error al inicializar reviews:', error);
-        console.error('Stack trace:', error.stack);
+        console.error('Error al inicializar reviews:', error);
         // Mostrar mensaje de error al usuario
         testimonialsGrid.innerHTML = `
             <div class="testimonial-card" style="grid-column: 1 / -1; text-align: center; padding: 2rem;">
@@ -373,25 +349,20 @@ async function initGoogleReviews() {
         if (loadingIndicator && loadingIndicator.parentElement) {
             loadingIndicator.remove();
         }
-        console.log('=== FIN CARGA DE GOOGLE REVIEWS ===');
     }
 }
 
 // Inicializar cuando el DOM esté listo
 (function() {
     function startInit() {
-        console.log('Google Reviews: Iniciando...');
-        console.log('Config:', GOOGLE_PLACES_CONFIG);
         initGoogleReviews();
     }
     
     if (document.readyState === 'loading') {
         document.addEventListener('DOMContentLoaded', () => {
-            console.log('Google Reviews: DOM cargado, esperando 500ms...');
             setTimeout(startInit, 500);
         });
     } else {
-        console.log('Google Reviews: DOM ya cargado, esperando 500ms...');
         setTimeout(startInit, 500);
     }
 })();
