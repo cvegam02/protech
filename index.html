@@ -12,29 +12,8 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
-    <!-- Navigation -->
-    <nav class="navbar" id="navbar">
-        <div class="container">
-            <div class="nav-wrapper">
-                <div class="logo">
-                    <img src="imgs/logo.png" alt="Protech Films Logo" class="logo-img">
-                </div>
-                <ul class="nav-menu" id="navMenu">
-                    <li><a href="#home" class="nav-link active">Inicio</a></li>
-                    <li><a href="#services" class="nav-link">Servicios</a></li>
-                    <li><a href="#about" class="nav-link">Nosotros</a></li>
-                    <li><a href="#gallery" class="nav-link">Galería</a></li>
-                    <li><a href="articulos.html" class="nav-link">¿Sabías que?</a></li>
-                    <li><a href="#contact" class="nav-link">Contacto</a></li>
-                </ul>
-                <div class="hamburger" id="hamburger">
-                    <span></span>
-                    <span></span>
-                    <span></span>
-                </div>
-            </div>
-        </div>
-    </nav>
+    <!-- Navigation - Cargado dinámicamente desde navbar.js -->
+    <div id="navbar-container"></div>
 
     <!-- Hero Section -->
     <section id="home" class="hero">
@@ -350,85 +329,6 @@
         </div>
     </section>
 
-    <!-- Testimonials Section -->
-    <section class="testimonials">
-        <div class="container">
-            <div class="section-header">
-                <span class="section-label">Testimonios</span>
-                <h2 class="section-title">Lo que Dicen Nuestros Clientes</h2>
-            </div>
-            <div class="testimonials-grid" id="testimonialsGrid">
-                <div class="testimonial-card">
-                    <div class="testimonial-rating">
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                    </div>
-                    <p class="testimonial-text">
-                        "Excelente servicio y productos de primera calidad. La instalación fue 
-                        profesional y el resultado superó nuestras expectativas. Definitivamente 
-                        recomendado."
-                    </p>
-                    <div class="testimonial-author">
-                        <div class="author-avatar">
-                            <i class="fas fa-user"></i>
-                        </div>
-                        <div class="author-info">
-                            <h4>Carlos Mendoza</h4>
-                            <p>Propietario Residencial</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="testimonial-card">
-                    <div class="testimonial-rating">
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                    </div>
-                    <p class="testimonial-text">
-                        "Instalamos las películas en toda nuestra oficina y la diferencia en 
-                        temperatura es notable. Además, el ahorro en energía ha sido significativo."
-                    </p>
-                    <div class="testimonial-author">
-                        <div class="author-avatar">
-                            <i class="fas fa-user"></i>
-                        </div>
-                        <div class="author-info">
-                            <h4>María González</h4>
-                            <p>Directora Comercial</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="testimonial-card">
-                    <div class="testimonial-rating">
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                    </div>
-                    <p class="testimonial-text">
-                        "Protech Films hizo un trabajo excepcional en nuestro proyecto industrial. 
-                        Profesionales, puntuales y con resultados de calidad premium."
-                    </p>
-                    <div class="testimonial-author">
-                        <div class="author-avatar">
-                            <i class="fas fa-user"></i>
-                        </div>
-                        <div class="author-info">
-                            <h4>Roberto Silva</h4>
-                            <p>Gerente de Proyectos</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
     <!-- About Section -->
     <section id="about" class="about">
         <div class="container">
@@ -506,6 +406,97 @@
         </div>
     </div>
 
+    <!-- Testimonials Section -->
+    <section class="testimonials">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-label">Testimonios</span>
+                <h2 class="section-title">Lo que Dicen Nuestros Clientes</h2>
+            </div>
+            <div class="testimonials-carousel-wrapper">
+                <button class="carousel-btn carousel-btn-prev" id="testimonialsPrev" aria-label="Anterior">
+                    <i class="fas fa-chevron-left"></i>
+                </button>
+                <div class="testimonials-carousel" id="testimonialsCarousel">
+                    <div class="testimonials-track" id="testimonialsTrack">
+                        <div class="testimonials-grid" id="testimonialsGrid">
+                <div class="testimonial-card">
+                    <div class="testimonial-rating">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                    </div>
+                    <p class="testimonial-text">
+                        "Excelente servicio y productos de primera calidad. La instalación fue 
+                        profesional y el resultado superó nuestras expectativas. Definitivamente 
+                        recomendado."
+                    </p>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">
+                            <i class="fas fa-user"></i>
+                        </div>
+                        <div class="author-info">
+                            <h4>Carlos Mendoza</h4>
+                            <p>Propietario Residencial</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial-card">
+                    <div class="testimonial-rating">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                    </div>
+                    <p class="testimonial-text">
+                        "Instalamos las películas en toda nuestra oficina y la diferencia en 
+                        temperatura es notable. Además, el ahorro en energía ha sido significativo."
+                    </p>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">
+                            <i class="fas fa-user"></i>
+                        </div>
+                        <div class="author-info">
+                            <h4>María González</h4>
+                            <p>Directora Comercial</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial-card">
+                    <div class="testimonial-rating">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                    </div>
+                    <p class="testimonial-text">
+                        "Protech Films hizo un trabajo excepcional en nuestro proyecto industrial. 
+                        Profesionales, puntuales y con resultados de calidad premium."
+                    </p>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">
+                            <i class="fas fa-user"></i>
+                        </div>
+                        <div class="author-info">
+                            <h4>Roberto Silva</h4>
+                            <p>Gerente de Proyectos</p>
+                        </div>
+                    </div>
+                </div>
+                        </div>
+                    </div>
+                </div>
+                <button class="carousel-btn carousel-btn-next" id="testimonialsNext" aria-label="Siguiente">
+                    <i class="fas fa-chevron-right"></i>
+                </button>
+            </div>
+        </div>
+    </section>
+
     <!-- Contact Section -->
     <section id="contact" class="contact">
         <div class="container">
@@ -559,6 +550,9 @@
                     <input type="hidden" name="_next" value="">
                     <input type="hidden" name="_template" value="box">
                     
+                    <!-- Contenedor para mensajes -->
+                    <div id="formMessage" class="form-message" role="alert" aria-live="polite"></div>
+                    
                     <div class="form-group">
                         <input type="text" id="name" name="name" placeholder="Nombre completo" required>
                     </div>
@@ -571,7 +565,7 @@
                     <div class="form-group">
                         <textarea id="message" name="message" rows="5" placeholder="Mensaje" required></textarea>
                     </div>
-                    <button type="submit" class="btn btn-primary btn-block">Enviar Mensaje</button>
+                    <button type="submit" class="btn btn-primary btn-block" id="submitButton">Enviar Mensaje</button>
                 </form>
             </div>
             <div class="contact-map">
@@ -647,9 +641,28 @@
         <i class="fas fa-arrow-up"></i>
     </button>
 
-    <script src="script.js"></script>
-    <script src="google-reviews.js"></script>
-    <script src="debug-scripts.js"></script>
+    <!-- Navbar debe cargarse primero -->
+    <script src="js/navbar.js"></script>
+    <!-- Módulos principales -->
+    <script src="js/hero.js"></script>
+    <script src="js/navigation.js"></script>
+    <script src="js/smooth-scroll.js"></script>
+    <script src="js/back-to-top.js"></script>
+    <script src="js/animations.js"></script>
+    <script src="js/stats.js"></script>
+    <script src="js/forms.js"></script>
+    <script src="js/gallery-effects.js"></script>
+    <script src="js/parallax.js"></script>
+    <script src="js/loading.js"></script>
+    <script src="js/keyboard.js"></script>
+    <!-- Galería y modal -->
+    <script src="js/gallery.js"></script>
+    <script src="js/gallery-modal.js"></script>
+    <!-- Servicios y testimonios -->
+    <script src="js/services.js"></script>
+    <script src="js/testimonials-carousel.js"></script>
+    <!-- Google Reviews -->
+    <script src="js/google-reviews.js"></script>
 </body>
 </html>
 

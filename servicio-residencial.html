@@ -13,32 +13,8 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
-    <!-- Navigation -->
-    <nav class="navbar" id="navbar">
-        <div class="container">
-            <div class="nav-wrapper">
-                <div class="logo">
-                    <a href="index.html" style="text-decoration: none; color: inherit; display: flex; align-items: center; gap: 0.5rem;">
-                        <img src="imgs/logo.png" alt="Protech Films Logo" class="logo-img">
-                        <span>Protech Films</span>
-                    </a>
-                </div>
-                <ul class="nav-menu" id="navMenu">
-                    <li><a href="index.html#home" class="nav-link">Inicio</a></li>
-                    <li><a href="index.html#services" class="nav-link">Servicios</a></li>
-                    <li><a href="index.html#about" class="nav-link">Nosotros</a></li>
-                    <li><a href="index.html#gallery" class="nav-link">Galería</a></li>
-                    <li><a href="articulos.html" class="nav-link">¿Sabías que?</a></li>
-                    <li><a href="index.html#contact" class="nav-link">Contacto</a></li>
-                </ul>
-                <div class="hamburger" id="hamburger">
-                    <span></span>
-                    <span></span>
-                    <span></span>
-                </div>
-            </div>
-        </div>
-    </nav>
+    <!-- Navigation - Cargado dinámicamente desde navbar.js -->
+    <div id="navbar-container"></div>
 
     <!-- Service Hero -->
     <section class="service-hero">
@@ -330,7 +306,15 @@
         <i class="fas fa-arrow-up"></i>
     </button>
 
-    <script src="script.js"></script>
+    <!-- Navbar debe cargarse primero -->
+    <script src="js/navbar.js"></script>
+    <!-- Módulos principales -->
+    <script src="js/navigation.js"></script>
+    <script src="js/smooth-scroll.js"></script>
+    <script src="js/back-to-top.js"></script>
+    <script src="js/animations.js"></script>
+    <script src="js/stats.js"></script>
+    <script src="js/keyboard.js"></script>
 </body>
 </html>
 
