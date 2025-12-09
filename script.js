@@ -197,10 +197,16 @@ const statsObserver = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
         if (entry.isIntersecting && !entry.target.classList.contains('counted')) {
             const statNumber = entry.target.querySelector('.stat-number');
-            if (!statNumber) return;
+            if (!statNumber) {
+                console.warn('No se encontró .stat-number en:', entry.target);
+                return;
+            }
             
             const targetValue = statNumber.getAttribute('data-target');
-            if (!targetValue) return;
+            if (!targetValue) {
+                console.warn('No se encontró data-target en:', statNumber);
+                return;
+            }
             
             // Extraer el número y el sufijo (+, %, etc.)
             const match = targetValue.match(/^(\d+)(.*)$/);
@@ -209,25 +215,31 @@ const statsObserver = new IntersectionObserver((entries) => {
                 const suffix = match[2] || '';
                 entry.target.classList.add('counted');
                 animateCounter(statNumber, target, suffix);
+            } else {
+                console.warn('No se pudo parsear data-target:', targetValue);
             }
         }
     });
 }, { threshold: 0.5 });
 
-// Inicializar cuando el DOM esté listo
-function initStats() {
+// Inicializar observer de stats
+function initStatsObserver() {
     const statItems = document.querySelectorAll('.stat-item');
     if (statItems.length > 0) {
+        console.log('Inicializando observer de stats para', statItems.length, 'elementos');
         statItems.forEach(item => {
             statsObserver.observe(item);
         });
+    } else {
+        console.warn('No se encontraron elementos .stat-item');
     }
 }
 
 if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', initStats);
+    document.addEventListener('DOMContentLoaded', initStatsObserver);
 } else {
-    initStats();
+    // Si el DOM ya está cargado, ejecutar inmediatamente
+    initStatsObserver();
 }
 
 // ============================================
@@ -254,13 +266,6 @@ if (contactForm) {
         setTimeout(() => {
             submitButton.textContent = '✓ Enviando...';
         }, 1000);
-    });
-}
-        //     // Handle success
-        // })
-        // .catch(error => {
-        //     // Handle error
-        // });
     });
 }
 
@@ -607,7 +612,7 @@ function loadGalleryProjects() {
             observer.observe(item);
         });
     } else {
-        // Si el observer no está disponible, solo agregar la clase
+        // Si el observer no está disponible, solo agregar las clases
         newItems.forEach(item => {
             item.classList.add('fade-in', 'visible');
         });
@@ -617,31 +622,23 @@ function loadGalleryProjects() {
 }
 
 // Cargar proyectos cuando el DOM esté listo
-function initGallery() {
-    console.log('Galería: Iniciando carga...');
+function initGalleryProjects() {
     const galleryGrid = document.getElementById('galleryGrid');
     if (galleryGrid) {
-        console.log('Galería: Elemento encontrado, cargando proyectos...');
+        console.log('Cargando proyectos de galería...');
         loadGalleryProjects();
-        console.log('Galería: Proyectos cargados');
+        console.log('Proyectos cargados:', projects.length);
     } else {
-        console.warn('Galería: No se encontró el elemento galleryGrid');
+        console.warn('No se encontró el elemento galleryGrid');
     }
 }
 
-(function() {
-    function startGallery() {
-        initGallery();
-    }
-    
-    if (document.readyState === 'loading') {
-        document.addEventListener('DOMContentLoaded', () => {
-            setTimeout(startGallery, 200);
-        });
-    } else {
-        setTimeout(startGallery, 200);
-    }
-})();
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initGalleryProjects);
+} else {
+    // Si el DOM ya está cargado, ejecutar después de un pequeño delay
+    setTimeout(initGalleryProjects, 100);
+}
 
 // ============================================
 // GALLERY MODAL - Carousel Functionality
