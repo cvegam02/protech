@@ -226,47 +226,24 @@ const contactForm = document.getElementById('contactForm');
 
 if (contactForm) {
     contactForm.addEventListener('submit', (e) => {
-        e.preventDefault();
-        
-        // Get form values
-        const formData = {
-            name: document.getElementById('name').value,
-            email: document.getElementById('email').value,
-            phone: document.getElementById('phone').value,
-            message: document.getElementById('message').value
-        };
-
-        // Show success message (in a real app, this would send to a server)
         const submitButton = contactForm.querySelector('button[type="submit"]');
         const originalText = submitButton.textContent;
         
+        // Mostrar estado de envío
         submitButton.textContent = 'Enviando...';
         submitButton.disabled = true;
-
-        // Simulate form submission
+        
+        // El formulario se enviará automáticamente a FormSubmit
+        // No necesitamos prevenir el comportamiento por defecto
+        // FormSubmit manejará el envío y redirección
+        
+        // Opcional: Mostrar mensaje de éxito después de un tiempo
+        // (FormSubmit redirige automáticamente, pero por si acaso)
         setTimeout(() => {
-            submitButton.textContent = '✓ Mensaje Enviado';
-            submitButton.style.background = 'var(--accent-color)';
-            
-            // Reset form
-            contactForm.reset();
-            
-            // Reset button after 3 seconds
-            setTimeout(() => {
-                submitButton.textContent = originalText;
-                submitButton.style.background = '';
-                submitButton.disabled = false;
-            }, 3000);
-        }, 1500);
-
-        // In production, you would send this data to your server:
-        // fetch('/api/contact', {
-        //     method: 'POST',
-        //     headers: { 'Content-Type': 'application/json' },
-        //     body: JSON.stringify(formData)
-        // })
-        // .then(response => response.json())
-        // .then(data => {
+            submitButton.textContent = '✓ Enviando...';
+        }, 1000);
+    });
+}
         //     // Handle success
         // })
         // .catch(error => {
