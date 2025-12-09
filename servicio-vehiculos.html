@@ -186,22 +186,42 @@
             <div class="projects-grid">
                 <div class="project-card">
                     <div class="project-image">
-                        <img src="https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?w=800&q=80" alt="Auto Premium" loading="lazy">
+                        <img src="imgs/servicio-autos/proyectos/Peugeot.jpeg" alt="Peugeot" loading="lazy">
                         <div class="project-overlay">
                             <div class="project-info">
-                                <h4>Auto Premium</h4>
-                                <p>Tintado 35%</p>
-                                <span class="project-badge">BMW</span>
+                                <p>Tintado 25%</p>
+                                <span class="project-badge">Peugeot</span>
                             </div>
                         </div>
                     </div>
                 </div>
                 <div class="project-card">
                     <div class="project-image">
-                        <img src="https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?w=800&q=80" alt="SUV Familiar" loading="lazy">
+                        <img src="imgs/servicio-autos/proyectos/Audi.jpeg" alt="Audi" loading="lazy">
                         <div class="project-overlay">
                             <div class="project-info">
-                                <h4>SUV Familiar</h4>
+                                <p>Tintado 30%</p>
+                                <span class="project-badge">Audi</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="project-card">
+                    <div class="project-image">
+                        <img src="imgs/servicio-autos/proyectos/Dondge.jpeg" alt="Dodge" loading="lazy">
+                        <div class="project-overlay">
+                            <div class="project-info">
+                                <p>Tintado 15%</p>
+                                <span class="project-badge">Dodge</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="project-card">
+                    <div class="project-image">
+                        <img src="imgs/servicio-autos/proyectos/Toyota.jpeg" alt="Toyota" loading="lazy">
+                        <div class="project-overlay">
+                            <div class="project-info">
                                 <p>Tintado 20%</p>
                                 <span class="project-badge">Toyota</span>
                             </div>
@@ -210,24 +230,22 @@
                 </div>
                 <div class="project-card">
                     <div class="project-image">
-                        <img src="https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?w=800&q=80" alt="Flota Comercial" loading="lazy">
+                        <img src="imgs/servicio-autos/proyectos/Jeep.jpeg" alt="Jeep" loading="lazy">
                         <div class="project-overlay">
                             <div class="project-info">
-                                <h4>Flota Comercial</h4>
-                                <p>15 Vehículos</p>
-                                <span class="project-badge">Empresa</span>
+                                <p>Tintado 5%</p>
+                                <span class="project-badge">Jeep</span>
                             </div>
                         </div>
                     </div>
                 </div>
                 <div class="project-card">
                     <div class="project-image">
-                        <img src="https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?w=800&q=80" alt="Camioneta Pickup" loading="lazy">
+                        <img src="imgs/servicio-autos/proyectos/VolksWagen.jpeg" alt="Volkswagen" loading="lazy">
                         <div class="project-overlay">
                             <div class="project-info">
-                                <h4>Camioneta Pickup</h4>
-                                <p>Tintado 5%</p>
-                                <span class="project-badge">Ford</span>
+                                <p>Tintado 35%</p>
+                                <span class="project-badge">Volkswagen</span>
                             </div>
                         </div>
                     </div>
@@ -305,7 +323,34 @@
         <i class="fas fa-arrow-up"></i>
     </button>
 
+    <!-- Projects Modal -->
+    <div class="gallery-modal" id="projectsModal">
+        <div class="modal-overlay" id="projectsModalOverlay"></div>
+        <div class="modal-content">
+            <button class="modal-close" id="projectsModalClose" aria-label="Cerrar">
+                <i class="fas fa-times"></i>
+            </button>
+            <button class="modal-nav modal-prev" id="projectsModalPrev" aria-label="Imagen anterior">
+                <i class="fas fa-chevron-left"></i>
+            </button>
+            <button class="modal-nav modal-next" id="projectsModalNext" aria-label="Imagen siguiente">
+                <i class="fas fa-chevron-right"></i>
+            </button>
+            <div class="modal-header">
+                <h3 class="modal-title" id="projectsModalTitle"></h3>
+                <p class="modal-location" id="projectsModalTint"></p>
+            </div>
+            <div class="modal-carousel" id="projectsModalCarousel">
+                <!-- Las imágenes se cargarán dinámicamente -->
+            </div>
+            <div class="modal-counter" id="projectsModalCounter">
+                <!-- El contador se generará dinámicamente -->
+            </div>
+        </div>
+    </div>
+
     <script src="script.js"></script>
+    <script src="servicio-vehiculos.js"></script>
 </body>
 </html>
 
