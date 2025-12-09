@@ -1536,6 +1536,92 @@ body::after {
     font-size: 1rem;
 }
 
+.testimonial-rating i.fa-star,
+.testimonial-rating i.fa-star-half-alt {
+    color: #FFB800;
+}
+
+.testimonial-rating i.far.fa-star {
+    color: rgba(10, 36, 56, 0.2);
+}
+
+/* Google Reviews Rating Header */
+.google-rating-header {
+    margin-top: 2rem;
+    padding: 2rem;
+    background: var(--dark-card);
+    border-radius: 16px;
+    border: 1px solid rgba(10, 36, 56, 0.1);
+    text-align: center;
+}
+
+.rating-display {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+}
+
+.rating-stars-large {
+    display: flex;
+    gap: 0.5rem;
+    font-size: 2rem;
+    color: #FFB800;
+}
+
+.rating-info {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.rating-number {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: var(--brand-blue);
+    font-family: 'Rajdhani', sans-serif;
+}
+
+.rating-total {
+    font-size: 1rem;
+    color: var(--text-secondary);
+}
+
+.google-maps-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: var(--brand-blue);
+    text-decoration: none;
+    font-weight: 600;
+    transition: var(--transition);
+    padding: 0.75rem 1.5rem;
+    border: 2px solid var(--brand-blue);
+    border-radius: 8px;
+}
+
+.google-maps-link:hover {
+    background: var(--brand-blue);
+    color: var(--white);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(10, 36, 56, 0.3);
+}
+
+.reviews-loading {
+    text-align: center;
+    padding: 2rem;
+    color: var(--text-secondary);
+}
+
+.author-avatar img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 50%;
+}
+
 .testimonial-text {
     color: var(--text-secondary);
     line-height: 1.8;

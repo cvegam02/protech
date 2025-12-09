@@ -197,7 +197,10 @@ const statsObserver = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
         if (entry.isIntersecting && !entry.target.classList.contains('counted')) {
             const statNumber = entry.target.querySelector('.stat-number');
+            if (!statNumber) return;
+            
             const targetValue = statNumber.getAttribute('data-target');
+            if (!targetValue) return;
             
             // Extraer el número y el sufijo (+, %, etc.)
             const match = targetValue.match(/^(\d+)(.*)$/);
@@ -211,12 +214,21 @@ const statsObserver = new IntersectionObserver((entries) => {
     });
 }, { threshold: 0.5 });
 
-document.addEventListener('DOMContentLoaded', () => {
+// Inicializar cuando el DOM esté listo
+function initStats() {
     const statItems = document.querySelectorAll('.stat-item');
-    statItems.forEach(item => {
-        statsObserver.observe(item);
-    });
-});
+    if (statItems.length > 0) {
+        statItems.forEach(item => {
+            statsObserver.observe(item);
+        });
+    }
+}
+
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initStats);
+} else {
+    initStats();
+}
 
 // ============================================
 // FORM HANDLING
@@ -589,14 +601,47 @@ function loadGalleryProjects() {
     
     // Re-aplicar observador de animaciones a los nuevos elementos
     const newItems = galleryGrid.querySelectorAll('.gallery-item');
-    newItems.forEach(item => {
-        item.classList.add('fade-in');
-        observer.observe(item);
-    });
+    if (typeof observer !== 'undefined' && observer) {
+        newItems.forEach(item => {
+            item.classList.add('fade-in');
+            observer.observe(item);
+        });
+    } else {
+        // Si el observer no está disponible, solo agregar la clase
+        newItems.forEach(item => {
+            item.classList.add('fade-in', 'visible');
+        });
+    }
+    
+    console.log('Galería: Proyectos renderizados:', newItems.length);
 }
 
 // Cargar proyectos cuando el DOM esté listo
-document.addEventListener('DOMContentLoaded', loadGalleryProjects);
+function initGallery() {
+    console.log('Galería: Iniciando carga...');
+    const galleryGrid = document.getElementById('galleryGrid');
+    if (galleryGrid) {
+        console.log('Galería: Elemento encontrado, cargando proyectos...');
+        loadGalleryProjects();
+        console.log('Galería: Proyectos cargados');
+    } else {
+        console.warn('Galería: No se encontró el elemento galleryGrid');
+    }
+}
+
+(function() {
+    function startGallery() {
+        initGallery();
+    }
+    
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', () => {
+            setTimeout(startGallery, 200);
+        });
+    } else {
+        setTimeout(startGallery, 200);
+    }
+})();
 
 // ============================================
 // GALLERY MODAL - Carousel Functionality
