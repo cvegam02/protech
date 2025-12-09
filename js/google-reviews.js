@@ -22,94 +22,46 @@ async function fetchGoogleReviews() {
         return null;
     }
     
-    // Usar Places API (Classic) primero - es más confiable y compatible
+    // Usar Places API (New) - Compatible con CORS y más moderna
     try {
-        console.log('Intentando obtener reviews con API clásica...');
-        const result = await fetchGoogleReviewsClassic(apiKey, placeId, language, maxReviews);
-        console.log('API clásica exitosa:', result);
-        return result;
-    } catch (error) {
-        console.error('Error al obtener reviews con API clásica:', error);
-        console.log('Intentando con API nueva como fallback...');
+        console.log('Obteniendo reviews con Places API (New)...');
+        const url = `https://places.googleapis.com/v1/places/${placeId}?fields=id,displayName,rating,userRatingCount,reviews&languageCode=${language}&key=${apiKey}`;
         
-        // Fallback: Intentar con Places API (New) si la clásica falla
-        try {
-            const url = `https://places.googleapis.com/v1/places/${placeId}?fields=id,displayName,rating,userRatingCount,reviews&languageCode=${language}&key=${apiKey}`;
-            
-            const response = await fetch(url, {
-                method: 'GET',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'X-Goog-Api-Key': apiKey,
-                    'X-Goog-FieldMask': 'id,displayName,rating,userRatingCount,reviews'
-                }
-            });
-            
-            if (!response.ok) {
-                const errorText = await response.text();
-                console.error('Error en respuesta:', response.status, errorText);
-                throw new Error(`Error ${response.status}: ${response.statusText}`);
+        const response = await fetch(url, {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+                'X-Goog-Api-Key': apiKey,
+                'X-Goog-FieldMask': 'id,displayName,rating,userRatingCount,reviews'
             }
-            
-            const data = await response.json();
-            console.log('API nueva exitosa:', data);
-            return data;
-        } catch (fallbackError) {
-            console.error('Error en API nueva:', fallbackError);
-            return null;
-        }
-    }
-}
-
-/**
- * Usa Places API (Classic) - Place Details
- */
-async function fetchGoogleReviewsClassic(apiKey, placeId, language, maxReviews) {
-    const url = `https://maps.googleapis.com/maps/api/place/details/json?place_id=${placeId}&fields=name,rating,user_ratings_total,reviews&language=${language}&key=${apiKey}`;
-    
-    console.log('Haciendo petición a Places API (Classic)...');
-    console.log('Place ID:', placeId);
-    console.log('URL (sin API key):', url.replace(apiKey, 'API_KEY_HIDDEN'));
-    
-    try {
-        const response = await fetch(url);
+        });
         
         if (!response.ok) {
             const errorText = await response.text();
-            console.error('Error HTTP:', response.status, errorText);
+            console.error('Error en respuesta:', response.status, errorText);
             throw new Error(`Error ${response.status}: ${response.statusText}`);
         }
         
         const data = await response.json();
-        console.log('Respuesta completa de API:', data);
-        
-        if (data.status !== 'OK' && data.status !== 'ZERO_RESULTS') {
-            const errorMsg = data.error_message || 'Error desconocido';
-            console.error('Google Places API Error:', data.status, errorMsg);
-            throw new Error(`API Error: ${data.status} - ${errorMsg}`);
-        }
-        
-        if (!data.result) {
-            console.error('No hay resultado en la respuesta');
-            throw new Error('No se encontraron datos del lugar');
-        }
-        
-        const reviewsCount = data.result.reviews ? data.result.reviews.length : 0;
-        console.log('Reviews encontradas:', reviewsCount);
-        console.log('Rating promedio:', data.result.rating);
-        console.log('Total de reseñas:', data.result.user_ratings_total);
-        
-        return {
-            result: data.result,
-            rating: data.result.rating,
-            userRatingCount: data.result.user_ratings_total,
-            reviews: data.result.reviews ? data.result.reviews.slice(0, maxReviews) : []
-        };
+        console.log('Reviews obtenidas exitosamente:', data);
+        return data;
     } catch (error) {
-        console.error('Error en fetchGoogleReviewsClassic:', error);
-        throw error;
+        console.error('Error al obtener reviews:', error);
+        return null;
     }
 }
+
+/**
+ * NOTA: La función fetchGoogleReviewsClassic fue eliminada
+ * 
+ * La API clásica de Google Places (maps.googleapis.com/maps/api/place/details/json)
+ * no funciona desde el cliente debido a políticas CORS estrictas.
+ * 
+ * Ahora usamos directamente Places API (New) que es compatible con CORS:
+ * - URL: places.googleapis.com/v1/places/{placeId}
+ * - Headers: X-Goog-Api-Key y X-Goog-FieldMask
+ * - Compatible con fetch desde el navegador
+ */
 
 /**
  * Formatea las reviews para mostrarlas en el sitio

@@ -8,14 +8,11 @@
     // Función para inicializar el navbar (se ejecuta después de que navbar.js lo cargue)
     function initNavbarFunctionality() {
         const navbar = document.getElementById('navbar');
-        const hamburger = document.getElementById('hamburger');
-        const navMenu = document.getElementById('navMenu');
-        const navLinks = document.querySelectorAll('.nav-link');
         const backToTop = document.getElementById('backToTop');
         
-        // Verificar que los elementos existan
-        if (!navbar || !hamburger || !navMenu) {
-            console.log('Elementos del navbar no encontrados, reintentando...');
+        // Verificar que el navbar exista
+        if (!navbar) {
+            console.log('Navbar no encontrado, reintentando...');
             setTimeout(initNavbarFunctionality, 200);
             return;
         }
@@ -36,25 +33,8 @@
             }
         });
 
-        // Mobile menu toggle
-        if (hamburger && navMenu) {
-            hamburger.addEventListener('click', () => {
-                hamburger.classList.toggle('active');
-                navMenu.classList.toggle('active');
-                document.body.style.overflow = navMenu.classList.contains('active') ? 'hidden' : '';
-            });
-        }
-
-        // Close mobile menu when clicking on a link
-        if (navLinks.length > 0 && hamburger && navMenu) {
-            navLinks.forEach(link => {
-                link.addEventListener('click', () => {
-                    hamburger.classList.remove('active');
-                    navMenu.classList.remove('active');
-                    document.body.style.overflow = '';
-                });
-            });
-        }
+        // El menú hamburger se maneja en navbar.js para evitar conflictos
+        // Solo manejamos el scroll effect y el back to top aquí
     }
 
     // Inicializar cuando el DOM esté listo (después de que navbar.js lo cargue)

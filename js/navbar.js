@@ -45,12 +45,12 @@
                             </a>
                         </div>
                         <ul class="nav-menu" id="navMenu">
-                            <li><a href="index.html#home" class="nav-link ${currentPage === 'home' ? 'active' : ''}">Inicio</a></li>
-                            <li><a href="index.html#services" class="nav-link ${currentPage === 'home' ? '' : ''}">Servicios</a></li>
-                            <li><a href="index.html#about" class="nav-link ${currentPage === 'home' ? '' : ''}">Nosotros</a></li>
-                            <li><a href="index.html#gallery" class="nav-link ${currentPage === 'home' ? '' : ''}">Galería</a></li>
-                            <li><a href="articulos.html" class="nav-link ${currentPage === 'articulos' ? 'active' : ''}">¿Sabías que?</a></li>
-                            <li><a href="index.html#contact" class="nav-link ${currentPage === 'home' ? '' : ''}">Contacto</a></li>
+                            <li><a href="index.html#home" class="nav-link ${currentPage === 'home' ? 'active' : ''}"><i class="fas fa-home"></i> Inicio</a></li>
+                            <li><a href="index.html#services" class="nav-link ${currentPage === 'home' ? '' : ''}"><i class="fas fa-briefcase"></i> Servicios</a></li>
+                            <li><a href="index.html#about" class="nav-link ${currentPage === 'home' ? '' : ''}"><i class="fas fa-users"></i> Nosotros</a></li>
+                            <li><a href="index.html#gallery" class="nav-link ${currentPage === 'home' ? '' : ''}"><i class="fas fa-images"></i> Galería</a></li>
+                            <li><a href="articulos.html" class="nav-link ${currentPage === 'articulos' ? 'active' : ''}"><i class="fas fa-lightbulb"></i> ¿Sabías que?</a></li>
+                            <li><a href="index.html#contact" class="nav-link ${currentPage === 'home' ? '' : ''}"><i class="fas fa-envelope"></i> Contacto</a></li>
                         </ul>
                         <a href="index.html#contact" class="nav-map-icon" aria-label="Ver ubicación en mapa" title="Nuestra Ubicación">
                             <i class="fas fa-map-marker-alt"></i>
@@ -106,18 +106,39 @@
         const navMenu = document.getElementById('navMenu');
         
         if (hamburger && navMenu) {
-            hamburger.addEventListener('click', () => {
-                hamburger.classList.toggle('active');
-                navMenu.classList.toggle('active');
+            // Remover listeners anteriores si existen
+            const newHamburger = hamburger.cloneNode(true);
+            hamburger.parentNode.replaceChild(newHamburger, hamburger);
+            
+            const newNavMenu = navMenu;
+            
+            // Agregar listener al nuevo elemento
+            newHamburger.addEventListener('click', (e) => {
+                e.stopPropagation();
+                newHamburger.classList.toggle('active');
+                newNavMenu.classList.toggle('active');
+                document.body.style.overflow = newNavMenu.classList.contains('active') ? 'hidden' : '';
             });
             
             // Cerrar menú al hacer click en un link
-            const navLinks = navMenu.querySelectorAll('.nav-link');
+            const navLinks = newNavMenu.querySelectorAll('.nav-link');
             navLinks.forEach(link => {
                 link.addEventListener('click', () => {
-                    hamburger.classList.remove('active');
-                    navMenu.classList.remove('active');
+                    newHamburger.classList.remove('active');
+                    newNavMenu.classList.remove('active');
+                    document.body.style.overflow = '';
                 });
+            });
+            
+            // Cerrar menú al hacer click fuera
+            document.addEventListener('click', (e) => {
+                if (newNavMenu.classList.contains('active') && 
+                    !newNavMenu.contains(e.target) && 
+                    !newHamburger.contains(e.target)) {
+                    newHamburger.classList.remove('active');
+                    newNavMenu.classList.remove('active');
+                    document.body.style.overflow = '';
+                }
             });
         }
     }
